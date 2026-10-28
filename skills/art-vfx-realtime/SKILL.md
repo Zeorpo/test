@@ -108,13 +108,17 @@ Workflow: [K]
 5. **Anti-aliasing and padding**: bake with multisampling/supersampling and dilate (edge padding) beyond UV islands to avoid seams at mip levels.
 6. **Verification**: inspect with checker normal, lit viewer under rotating light, mirrored geometry checks; confirm no waviness, skewing on cylindrical parts, or gradient banding (use 16-bit normals for large smooth surfaces if the pipeline allows).
 7. **Texture bake of procedural materials**: bake procedural nodes into PBR maps for runtime (albedo, roughness, metallic, normal, height); keep color maps sRGB and data maps linear. [V glTF color spaces]
+Blender (Cycles) bake settings, from source at v5.2.3 [V blender/blender v5.2.3 `rna_render.cc`, `rna_scene.cc`, `DNA_scene_types.h`]:
+- Bake passes: Combined, Ambient Occlusion, Shadow, Position, Normal, UV, Roughness, Emission, Environment, Diffuse, Glossy, Transmission. Curvature, thickness and ID maps are not built-in passes; make them with shader setups or a dedicated baker.
+- Defaults: margin **16 px** with margin type **Adjacent Faces** (the other type is Extend); cage extrusion **0** and max ray distance **0**, so set both for selected-to-active bakes; normal space Object or Tangent, swizzle **+X +Y +Z** = OpenGL / Y+ convention. For DirectX-style targets (Unreal) set green to -Y or flip G afterwards.
 Lightmap baking (Godot as concrete reference): [V Godot LightmapGI]
 - Needs a **UV2** layer with unique, non-overlapping faces and a texture size per object (unwrap on scene import recommended); baked materials' UV2 slot is reserved.
 - Baked lightmaps are static, cost almost nothing at runtime, work on low-end and mobile, can store direct light (fastest, lowest quality, blurrier sun shadows) or indirect only (keeps real-time direct light and shadows); reflections still require reflection probes or sky; baking can take minutes and is done on the GPU.
 - Baking nodes must be siblings or children of the LightmapGI node; multiple LightmapGI nodes bake separate parts.
 - Light bake mode per light (disabled/static/dynamic) controls whether it is baked.
 Export/import hygiene for engines: [V Godot model export considerations]
-- Triangulate before export (Triangulate modifier with Apply Modifiers checked) to avoid unpredictable engine triangulation, apply transforms, and use the engine's axis conventions (Godot: right-handed, Y-up, camera forward -Z, asset front +Z; in Blender an asset's front is -Y).
+- Blender glTF exporter defaults worth knowing [V glTF-Blender-IO e03d6603]: +Y Up on; Normals and UVs on; **Tangents off**; Shape Keys on (shape key normals on, tangents off); Skinning on with **4 bone influences** (more is allowed but "models may appear incorrectly in many viewers"); Deformation Bones Only off; animations exported, **always sampled** at 1 frame step with duplicate keys removed; Punctual Lights, Cameras and Custom Properties (extras) off; Draco compression off; GPU instancing (EXT_mesh_gpu_instancing) off.
+- Triangulate before export to avoid unpredictable engine triangulation: Triangulate modifier plus the glTF exporter's Apply Modifiers (off by default), or, for meshes with shape keys, apply triangulation on a copy, because Apply Modifiers prevents exporting shape keys [V glTF-Blender-IO]. Also apply transforms, and use the engine's axis conventions (Godot: right-handed, Y-up, camera forward -Z, asset front +Z; in Blender an asset's front is -Y).
 
 ## Quality gates
 - AOV set documented and verified (recombination equals beauty; data passes unfiltered float).

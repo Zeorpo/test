@@ -41,7 +41,13 @@ Core concepts: [V OCIO glossary, ACES docs]
 - ACES 2 (ACES documentation): redesigned output transforms with a less aggressive tone scale (lower mid-tone contrast, gentler highlight roll-off), robust gamut mapping for reduced clipping and better perceptual uniformity, minimized hue shifts across exposure, round-trip consistency, and simple parameterization for custom displays. Also improved AMF (ACES Metadata File) specification and EXR compression recommendations. [V ACES docs]
 - AgX: a view transform by Troy Sobotka (repo `sobotka/AgX`, with configuration-generation repos); Godot's docs describe AgX as film-like, desaturating bright values, better at maintaining hue as colors brighten, and slowest of its tone mappers. [V Godot environment doc; V AgX README]
 - Godot tonemap options for context: Linear (clips), Reinhard (roll-off, can look dull), Filmic, ACES (high contrast, desaturates highlights), AgX; recommended white reference 6-8 for photoreal lighting. [V Godot]
-- Blender: manual documents Standard, Filmic, AgX and ACES 2.0 view transforms, ACEScg working-space support, ACES 2.0 view transform in Blender 5.0, and OpenEXR export in ACES2065-1 and ACEScg; the official ACES OCIO config can be installed via the `OCIO` environment variable. [S, from search results of docs.blender.org; verify against the installed Blender version]
+- Blender's built-in OCIO config (v5.2.3, OCIO profile 2.5) [V blender/blender v5.2.3 `release/datafiles/colormanagement/config.ocio`]:
+  - Views on the sRGB display: Standard, ACES 1.3, ACES 2.0, Khronos PBR Neutral, AgX, Filmic, Filmic Log, False Color, Raw. Displays: sRGB, Display P3, Rec.1886, Rec.2020, Rec.2100-PQ, Rec.2100-HLG; the HDR displays offer ACES 2.0 at 500/1000/2000/4000 nits, ACES 1.3 at 1000/2000/4000 nits, and AgX HDR 1000 nits.
+  - Roles: reference ACES2065-1; scene_linear, rendering, default_float Linear Rec.709; data Non-Color; color_timing and compositing_log AgX Log.
+  - Looks: AgX and False Color contrast looks (Punchy, Greyscale, Very High ... Very Low Contrast), Filmic contrast looks, ACES 1.3/2.0 Reference Gamut Compression.
+  - Input spaces include ACEScg, ACEScc, ACEScct, ACES2065-1, Linear Rec.2020, Linear DCI-P3 D65 and camera logs (ARRI LogC3/LogC4, RED Log3G10, Sony S-Log3, Canon Log2/3, Panasonic V-Log, Apple Log, Blackmagic Film Gen5, DaVinci Intermediate, DJI D-Log).
+  - **Per-file working space** (`bpy.data.colorspace.working_space`, read-only in Python): Linear Rec.709 (default), Linear Rec.2020, or ACEScg; it is the space for all scene-linear colors and for compositing, shader and geometry-node processing. [V `rna_main.cc`, `colormanagement.cc`]
+  - Still [S], not seen in source this session: EXR export in ACES2065-1/ACEScg and loading the official ACES config via the `OCIO` environment variable (standard OCIO behavior).
 - Colorspace discipline checklist: [K]
   1. Declare project working space (scene-linear Rec.709/sRGB primaries, or ACEScg for wide-gamut pipelines).
   2. Tag every texture/plate with its input colorspace; tag every output with display/view and data type.
@@ -127,5 +133,6 @@ Order of operations (biggest wins first): [K unless noted]
 - [V] Godot docs: environment and post-processing, physical light and camera units, rendering limitations: https://github.com/godotengine/godot-docs
 - [V] Cryptomatte: https://github.com/Psyop/Cryptomatte ; OpenEXR: https://github.com/AcademySoftwareFoundation/OpenEXR
 - [V] awesome-cg-vfx-pipeline (render managers, review tools): https://github.com/cgwire/awesome-cg-vfx-pipeline
+- [V] Blender built-in OCIO config at v5.2.3: https://github.com/blender/blender/blob/v5.2.3/release/datafiles/colormanagement/config.ocio
 - [S] Blender manual color management pages (docs.blender.org blocked in this session).
 - [K] Blain Brown, *Cinematography: Theory and Practice*; Steven Katz, *Film Directing Shot by Shot*; Roger Deakins interviews.

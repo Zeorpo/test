@@ -13,6 +13,8 @@ Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** f
 Mental model: [K]
 - A node tree transforms **geometry** (mesh, curves, point cloud, volume, instances, grease pencil) using **attributes** (data on points, edges, faces, face corners, curve control points, instances) and **fields** (functions evaluated per element on demand). Instances are lightweight references to geometry; "realize instances" converts them to real geometry when needed.
 - Blender's evaluated geometry is held in a `GeometrySet` with components: mesh, pointcloud, curves, volume, grease_pencil (and instances). Access evaluated geometry from the depsgraph-evaluated object (`ob_eval.evaluated_geometry()`); `mesh_base` gives the mesh before final subdivision. [V Blender Python API example GeometrySet.0]
+- Reading instances from Python: `geometry.instances_pointcloud()` holds one point per instance; `geometry.instance_references()` lists what is instanced (objects, collections or nested GeometrySets); attribute `instance_transform` (4x4) and `.reference_index` map each instance to its reference. [V GeometrySet.0 example]
+- Node set at v5.2.3 (270 geometry node source files) [V blender/blender v5.2.3 `source/blender/nodes/geometry/nodes/`]: simulation, repeat, bake and for-each-element zones; closures and bundles; lists (field to list, filter/sort list); menu switch; volume grids and SDF grids (mesh to SDF, SDF boolean/fillet/offset, grid voxelize, advect, Poisson solve); importers (OBJ, PLY, STL, CSV, VDB, text); UV Unwrap and Pack Islands; Raycast, Sample Nearest Surface, Proximity; an **XPBD solver** node; tool-only nodes (3D cursor, selection, face sets) for node-based tools. Main (5.4 alpha) has 288; check node availability against the user's version.
 Core patterns: [K]
 1. **Distribute and instance**: distribute points on surface (random, Poisson disk) -> filter with selection fields (slope, height, vertex group, noise) -> instance on points -> rotate to align with normal, randomize scale/rotation -> realize only if needed.
 2. **Curve-driven geometry**: curve to mesh (profile sweep), resample curve, curve to points, for cables, pipes, fences, roads, hair-like strands.
@@ -75,6 +77,18 @@ Foundations: [V Blender Python API examples; K]
 - **Handlers and timers**: `bpy.app.handlers` (`load_post`, `frame_change_pre/post`, `depsgraph_update_post`, render handlers); use `@persistent` so handlers survive file loads in add-ons; `bpy.app.timers.register(func, first_interval=...)` runs functions later or periodically. [V handlers/timers examples]
 - **Add-on structure**: `bl_info`/manifest, register/unregister classes in order, operators with `bl_idname`, `poll`, `execute` returning `{'FINISHED'}` or `{'CANCELLED'}` and using `self.report`, properties via `bpy.props`, preferences via AddonPreferences. [V operator/panel examples; K]
 - **Headless/batch**: `blender -b file.blend --python script.py -- args` for automated export, validation, thumbnail rendering and CI; BlenderProc is a procedural pipeline built on this. [K; V awesome-blender lists BlenderProc, blender-cli-rendering]
+- **Gotchas from the official API guide** [V blender/blender v5.2.3 `doc/python_api/rst/info_gotcha*.rst`, `info_advanced_blender_as_bpy.rst`]:
+  - **No Python threads.** They crash Blender in hard-to-diagnose ways; threads may only run while the main thread is blocked (e.g., `join()` before the script ends). Use `multiprocessing` for independent work.
+  - **Undo/redo invalidates every ID and its sub-data**, and adding many items to a collection can reallocate it. Never keep references to Blender data across these; store indices or names and re-fetch from the context.
+  - **Names are not guaranteed**: new data may be renamed (too long, duplicate, empty). Keep your own mapping to created objects; linked libraries can have name collisions.
+  - **Stale values**: evaluation is deferred, so after setting `location` call `view_layer.update()` before reading `matrix_world`.
+  - **Edit Mode**: `obj.data` is out of sync while editing; use `bmesh.from_edit_mesh`, or exit Edit Mode first.
+  - **Faces**: edit with BMesh; export with `mesh.polygons`; use `mesh.loop_triangles` only to export to formats without n-gons.
+  - **Operators**: they can't take data arguments, return only a status, and fail `poll` without saying why; read the poll function's source when stuck.
+  - Modifying data must create an undo step. Don't make linked library data point at local data (undo can crash). Keep RNA property update callbacks fast; calling operators there is unsupported.
+  - `bpy` as a Python module is available via pip (`pypi.org/project/bpy`); it behaves like `blender -b`, and `bpy.app.binary_path` is empty by default.
+- Handler names at v5.2.3 [V `bpy_app_handlers.cc`]: frame_change_pre/post; render_pre/post/write/stats/init/complete/cancel; load_pre/post/post_fail; save_pre/post/post_fail; undo_pre/post; redo_pre/post; depsgraph_update_pre/post; object_bake_pre/complete/cancel; composite_pre/post/cancel; animation_playback_pre/post; blend_import_pre/post; exit_pre; version_update; load_factory_preferences_post; load_factory_startup_post; annotation_pre/post; translation_update_post; xr_session_start_pre.
+- Packaging: extensions use a `blender_manifest.toml`; `bl_info` is still read for legacy add-ons but is not used for extensions (Blender generates one internally for compatibility). [V `scripts/modules/addon_utils.py`]
 - Developer tooling listed in awesome-blender: fake-bpy-module (autocomplete), Blender Development VS Code extension, blender-debugger-for-vscode, blender-addon-tester, EasyBPY, snippets library, Advanced Blender Add-on. [V awesome-blender]
 Pipeline tool patterns: [K]
 1. **Validators**: scripts that check naming, transforms applied, UV presence/overlap, texel density, polycount, material slot names, unused data; return structured reports.
@@ -114,4 +128,5 @@ Cross-DCC and engine scripting: Maya (Python `maya.cmds`/PyMEL/OpenMaya), Houdin
 - [V] OpenUSD glossary (composition arcs, LIVERPS): https://github.com/PixarAnimationStudios/OpenUSD/blob/release/docs/glossary.rst
 - [V] awesome-blender Geometry Nodes and Python Scripting sections; Geometry Script, NodeToPython, fake-bpy-module: https://github.com/agmmnn/awesome-blender
 - [V] Computer Graphics from Scratch, tinyrenderer, tinyraytracer (listed in awesome-blender): https://github.com/ggambetta/computer-graphics-from-scratch , https://github.com/ssloy/tinyrenderer
+- [V] Blender source at v5.2.3 (geometry node list, Python API guide pages, handlers): https://github.com/blender/blender/tree/v5.2.3
 - [S] Blender manual Geometry Nodes pages (docs.blender.org blocked in this session).

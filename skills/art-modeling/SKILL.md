@@ -89,7 +89,7 @@ Practice:
 - Keep object scale applied before modifiers that depend on absolute distance (bevel width, solidify). [K]
 - Use vertex groups/attributes and masks to drive modifier strength. [K]
 - Apply order matters; applying a modifier is a one-way operation, so save a version first. [K]
-- Export awareness: the glTF exporter bakes modifiers on export (apply-modifiers option); check what the target engine will actually see. [K; glTF-Blender-IO cloned for follow-up reading]
+- Export awareness: the glTF exporter's **Apply Modifiers** option (`export_apply`) is **off by default**, so un-applied modifiers are dropped unless you enable it; its own tooltip warns that enabling it (armatures excluded) **prevents exporting shape keys**. For meshes with shape keys, apply the needed modifiers by hand on a copy instead. Re-import the file to check what the engine will actually see. [V glTF-Blender-IO `io_scene_gltf2/__init__.py`]
 
 ## Workflow: hard-surface prop (example)
 1. Blockout with primitives at real scale; verify silhouette from front/side/3/4.

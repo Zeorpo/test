@@ -8,7 +8,7 @@ Research session date: 2026-10-28. Method: shallow `git clone` of public GitHub 
 |---|---|---|
 | google/filament | daba7a22da41 | `docs_src/src_markdeep/Filament.md.html` (PBR material model, parameter ranges, reflectance tables, light units, IBL, exposure, normal blending, clustered forward rendering) |
 | KhronosGroup/glTF | 9a15a26fdbc1 | `specification/2.0/Specification.adoc` (coordinate system, units, textures, materials, tangents, skins, morph targets, animation, interpolation appendix), `extensions/2.0/Khronos` listing |
-| KhronosGroup/glTF-Blender-IO | e03d6603c44a | Cloned; only referenced for follow-up, not read in depth |
+| KhronosGroup/glTF-Blender-IO | e03d6603c44a | `addons/io_scene_gltf2/__init__.py` (exporter option names, defaults and tooltips; add-on version 5.4.7) |
 | mmp/pbr-book-website | dace19bd6362 | pbrt 4th edition HTML (thin lens model, chapter list: radiometry, sampling, light transport, volumes, textures/materials, hair) |
 | AcademySoftwareFoundation/OpenPBR | f8d6d947dfae | `parametrization.md.html` (parameter groups, ranges and defaults) |
 | AcademySoftwareFoundation/MaterialX | a489b4a64c5e | Cloned; referenced as OpenPBR's parent project |
@@ -22,6 +22,8 @@ Research session date: 2026-10-28. Method: shallow `git clone` of public GitHub 
 | PixarAnimationStudios/OpenUSD | 84d8ed1ae033 | `docs/glossary.rst` (LIVERPS, payloads, variants, kind, purpose, model hierarchy) |
 | godotengine/godot-docs | e13e2a70b71c | Lights and shadows, GI, volumetric fog, physical light and camera units, environment and tonemapping, rendering limitations, mesh LOD, visibility ranges, occlusion culling, GPU and 3D optimization, CSG, GridMap, MultiMesh, decals, particles, animation tracks, AnimationTree, skeleton retargeting, import suffixes, model export considerations, shaders, LightmapGI |
 | blender/blender (sparse: docs examples, Rigify) | 96bc1f7558fe | `doc/python_api/examples`, `scripts/addons_core/rigify` |
+| blender/blender tag v5.2.3 (stable, sparse) | e13b728c6880 | `release/datafiles/colormanagement/config.ocio` (views, displays, roles, looks, color spaces); `makesrna/intern/rna_main.cc` + `imbuf/intern/colormanagement.cc` (per-file working space); `nodes/geometry/nodes/` (node list); `doc/python_api/rst/info_gotcha*.rst`, `info_best_practice.rst`, `info_advanced_blender_as_bpy.rst`; `doc/python_api/examples` (GeometrySet, temp_override, handlers, timers); `python/intern/bpy_app_handlers.cc`; `scripts/modules/addon_utils.py`; `makesrna/intern/rna_render.cc`, `rna_scene.cc`, `makesdna/DNA_scene_types.h` (bake passes and defaults); `makesrna/intern/rna_modifier.cc` (modifier list) |
+| blender/blender main (5.4 alpha) | 74a450bb01eb | Geometry node list only, to compare with 5.2.3 |
 | matthias-research/pages | bfc4b63667c7 | Ten Minute Physics slides: XPBD, soft bodies, hashing, cloth, self-collision, Eulerian fluid, FLIP, height-field water, fire, rigid bodies |
 | patriciogonzalezvivo/thebookofshaders | 5a537e76d736 | Table of contents |
 | wjakob/instant-meshes | 7b3160864a2e | README (field-aligned meshing, SIGGRAPH Asia 2015, used in Modo) |

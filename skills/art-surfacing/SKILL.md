@@ -52,7 +52,7 @@ Validation: render the asset under at least 3 lighting setups (HDRI studio, outd
 | Base color / albedo | RGB(A) | sRGB | no lighting; alpha only if needed [V glTF] |
 | Metallic | scalar | linear | mostly 0/1 [V Filament] |
 | Roughness | scalar | linear | |
-| Normal | RGB | linear | tangent space; alpha ignored; green-channel convention differs (OpenGL +Y vs DirectX -Y) [V glTF for linear/MikkTSpace; K for channel convention] |
+| Normal | RGB | linear | tangent space; alpha ignored; green-channel convention differs (OpenGL +Y vs DirectX -Y); Blender bakes +X +Y +Z (OpenGL) by default [V glTF for linear/MikkTSpace; V Blender v5.2.3 bake defaults; K for which engines use which] |
 | Ambient occlusion | scalar | linear | glTF: red channel; 0 = fully occluded [V glTF] |
 | Emissive | RGB | sRGB | HDR strength via factor [V glTF] |
 | Height / displacement | scalar | linear, 16-bit+ | 8-bit height bands [K] |
