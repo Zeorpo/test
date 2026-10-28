@@ -7,7 +7,7 @@ description: UV unwrapping and packing, texture painting, PBR texturing and maps
 
 Covers: 18 UV Unwrapping, 19 UV Mapping and Packing, 20 Texture Painting, 21 PBR Texturing, 22 Texture Maps, 23 Procedural Texturing, 24 Material Creation, 25 Shading, 26 Surface Imperfections and Wear, 27 Texture Optimization.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## 18. UV unwrapping
 - UVs map 3D surface to 2D texture space; goals are minimal distortion, hidden/low-visibility seams, and efficient use of space. [K]
@@ -24,12 +24,28 @@ Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** e
 - Face-varying behavior: UVs have their own topology; seams are discontinuities and subdivision/UV smoothing mode affects border interpolation. [V OpenSubdiv face-varying notes]
 - Keep UV sets documented: UV0 = materials, UV1 = lightmap/AO, others per spec. [K]
 
+### UV packing in practice [V xatlas@f700c77 `source/xatlas/xatlas.h`; V 3DC-Asset-Creation@3ba6cf7]
+- xatlas (an independent fork of thekla_atlas, used by The Witness) splits meshes into charts, parameterizes and packs them. Pack options: `padding` (pixels around charts), `texelsPerUnit` (a 1x1 quad at 32 takes about 32x32 texels; 0 estimates from `resolution`; both 0 targets about 1024x1024), `resolution` (0 = one atlas sized by texel density, else one or more atlases at that exact size), `bilinear` (default true, leaves room for bilinear sampling), `blockAlign` (align charts to 4x4 blocks, faster and friendlier to block compression, default false), `bruteForce` (best packing, slower; default is random placement), `rotateCharts` (default true), `maxChartSize`.
+- Chart-growing weights: `normalDeviationWeight` 2.0, `roundnessWeight` 0.01, `straightnessWeight` 6.0, `normalSeamWeight` 4.0 (above 1000 normal seams are fully respected), `textureSeamWeight` 0.5, `maxCost` 2.0 (lower gives more charts). Defaults are starting points. [V]
+- One UV set per delivered asset is the safe default: several UV sets are not universally supported and not fully supported by USDZ renderers. UVs for a non-tiling bake (AO) must lie in 0-1 and be unique. [V Khronos 2.0]
+- If overlaps are intentional (repeated logos), move every overlap by a whole UV unit before baking so only one copy sits in 0-1; the moved copies still sample the same pixels afterwards. [V Khronos 1.0 UVs]
+- Seams belong where the real object has breaks (stitching, panel lines) or in low-visibility areas. Even texel density is the default; give visible parts more space deliberately and document it. A tileable texture authored at 10 cm x 10 cm shows a quarter of itself on a 5 cm object when UVs are to scale. [V Khronos 1.0 UVs]
+
 ## 20. Texture painting
+- Layer-based painting in Blender: **Ucupaint** is an add-on that manages texture layers and masks for Eevee and Cycles (works from Blender 2.76, installable as an extension on 4.2+). [V ucupaint@c06eb08 README]
 - Work in layers with masks, non-destructively: base material, variation, wear/dirt, detail, decals. Paint masks, not final colors. [K]
 - Use generators driven by baked maps (curvature, AO, position, thickness) to place wear and dirt, then hand-paint intent on top. [K]
 - Paint in the correct color space: base color authored in sRGB; roughness/metal/normal/height in linear data maps. [V glTF spec material section]
 - Paint across seams using projection or 3D paint and verify at all seam locations; fix with dilation and seam-aware tools. [K]
 - Stylized hand-painted work puts lighting/shadow cues in color intentionally; physically-based work must not bake lighting into base color (see below).
+
+### Texture conventions that engines and reviewers enforce [V ue5-style-guide@198a855 (the master branch is the UE4 guide; a `v2` branch targets UE5 and was not read); V 3DC-Asset-Creation@3ba6cf7]
+- Dimensions are powers of two (non-square allowed, e.g. 2048x1024); UI textures are the exception. Keep every dimension at or below 8192 unless there is an explicit reason. Keep one project-wide texel density (example: 8 px per unit gives 1024x1024 for a 100-unit cube).
+- Channel packing: three data channels in one RGB texture is normal (for example emissive/roughness/occlusion in R/G/B). Avoid four-channel RGBA packing except opacity in the albedo alpha, because an alpha channel adds memory overhead.
+- Suffix convention used by that guide: `_D` albedo, `_N` normal, `_R` roughness, `_A` alpha, `_O` occlusion, `_B` bump, `_E` emissive, `_M` mask or metallic, `_S` specular.
+- Metallic should be close to binary: white for metal, black for dielectric, with grey only for anti-aliasing at borders. Metals carry their reflectance colour in base colour. Prefer metallic-roughness over specular-glossy for delivery (fewer textures). [V Khronos 2.0]
+- Alpha has two glTF modes: Mask (on/off coverage, used for leaves or wire fences) and Blend (soft gradations such as fur or smoke). Transparency is hard to render accurately in real time and can cost a lot of performance, so use Mask where a cut-out will do. [V Khronos 2.0; the last clause is a recommendation, [K]]
+- Author lossless PNG and generate delivery formats (JPEG, WebP, KTX2) with tooling for the target. [V Khronos 2.0]
 
 ## 21. PBR texturing
 Key rules from Google Filament's material guidance: [V]
@@ -52,7 +68,7 @@ Validation: render the asset under at least 3 lighting setups (HDRI studio, outd
 | Base color / albedo | RGB(A) | sRGB | no lighting; alpha only if needed [V glTF] |
 | Metallic | scalar | linear | mostly 0/1 [V Filament] |
 | Roughness | scalar | linear | |
-| Normal | RGB | linear | tangent space; alpha ignored; green-channel convention differs (OpenGL +Y vs DirectX -Y); Blender bakes +X +Y +Z (OpenGL) by default [V glTF for linear/MikkTSpace; V Blender v5.2.3 bake defaults; K for which engines use which] |
+| Normal | RGB | linear | tangent space; alpha ignored; green-channel convention differs (OpenGL +Y vs DirectX -Y); Blender bakes +X +Y +Z (OpenGL) by default [T BAKE-1; V glTF for linear/MikkTSpace; K for which engines use which] |
 | Ambient occlusion | scalar | linear | glTF: red channel; 0 = fully occluded [V glTF] |
 | Emissive | RGB | sRGB | HDR strength via factor [V glTF] |
 | Height / displacement | scalar | linear, 16-bit+ | 8-bit height bands [K] |
@@ -98,6 +114,9 @@ Validation: render the asset under at least 3 lighting setups (HDRI studio, outd
 - Size by screen coverage, not by pride: pick resolution so texel density meets the on-screen pixel density at hero distance. [K]
 - Platform limits: desktop textures larger than 8192x8192 may be unsupported on old GPUs; mobile typically limits to 4096x4096; non-power-of-two repeating textures may fail on some mobile GPUs, so use power-of-two sizes for tiling textures and avoid >4096 for broad compatibility. [V Godot rendering limitations]
 - Use GPU texture compression (BCn on desktop, ASTC/ETC on mobile), generate mipmaps, and pack channels (e.g., ORM). Data textures (normal, mask) compress differently from color. [K]
+- Basis Universal v2.5 supercompression [V basis_universal@ee771a7 README]: ETC1S is low-to-medium quality with high compression; UASTC LDR 4x4 is high quality (8 bits per pixel); UASTC HDR 4x4 constrains ASTC HDR so it transcodes quickly to BC6H; plain ASTC LDR offers all 14 block sizes from 4x4 to 12x12. ASTC always uses 128 bits per block, so bits per pixel = 128 / (block width x block height): 4x4 = 8, 6x6 = about 3.56, 8x8 = 2, 12x12 = about 0.89. All of these ship in a KTX2 container and transcode on the device to BC1-7, ETC1/2, ASTC or PVRTC.
+- Which to use for which map (ETC1S for colour, UASTC for normals) is common practice and not stated in that README. [K]
+- glTF carries Basis textures through `KHR_texture_basisu`; `gltfpack -tc` converts all textures to KTX2. [V meshoptimizer gltf README]
 - Share trim sheets/atlases, tile detail textures, and use virtual texturing/streaming for large worlds. [K]
 - Color banding in low-bit buffers: add dithering/debanding or noise in textures; engines may offer a cheap fullscreen debanding pass. [V Godot rendering limitations]
 - Track budgets: texture memory per asset, per scene, per platform, with an automated check at export.

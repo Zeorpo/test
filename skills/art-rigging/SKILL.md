@@ -7,7 +7,7 @@ description: Character and object rigging - hierarchies and parenting, skeletons
 
 Covers: 44 Object Hierarchies and Parenting, 45 Rigging, 46 Skeleton Creation, 47 Skinning, 48 Weight Painting, 49 Forward Kinematics (FK), 50 Inverse Kinematics (IK), 51 Constraints and Controllers, 52 Facial Rigging, 53 Blend Shapes and Shape Keys.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## Rigging mindset
 A rig is a product for animators: predictable, fast, and hard to break. Design from the animation requirements (what poses, what shots, game vs film) backward. Separate the **deformation rig** (joints that skin the mesh, exported to engines) from the **control rig** (animator-facing controls that drive deformation joints). Rigify (Blender) follows this with ORG (original), MCH (mechanism), DEF (deform) and control bone groups. [K; V rigify rigs/limbs source]
@@ -78,6 +78,13 @@ Workflow (heaviest value first): [K]
   - Lock/hide unusable channels; set limits and defaults; use custom properties for switches (IK/FK, follow space, stretch).
   - Expose a minimal main set; hide mechanism bones in a separate collection/layer.
 - Blender note: bone collections replace layers; custom shapes are widgets; Rigify generates the control rig from a "metarig". [K; V rigify generate.py presence]
+- Exporting a rig from Blender to glTF [T GLTF-1, GLTF-2]: skinning and shape keys export by default; deformation-only bones is off by default; at most 4 bone influences per vertex by default (more can be enabled, but viewers may render incorrectly); shape key normals export, tangents do not; **enabling Apply Modifiers drops all shape keys** (verified: 1 morph target without it, 0 with it).
+
+### Twist and corrective techniques from a production Maya toolkit [V cmt@1b1a9a4 `src/swingTwistNode.cpp`, `src/rbfNode.cpp`, `src/DemBones`]
+- **Swing-twist decomposition** splits a joint rotation into swing and twist about a reference axis, so twist can be distributed to helper joints (forearm, upper arm) without candy-wrapper collapse. The node computes the local matrix from world and parent-inverse so joint orient is handled automatically, scales each part by input weights, and multiplies by the target's rest matrix so the rotation happens in the driven transform's space (needed when driving `offsetParentMatrix`).
+- **RBF (radial basis function) solver** learns from sample poses: inputs and outputs are stored relative to a neutral pose so the rest pose is the identity, quaternions are averaged with weights, and weights are regressed (absolute or relative-to-neutral modes). Use it for pose-space deformation: corrective shapes or helper joints driven by joint rotations.
+- **Dem Bones** is bundled as a Maya command (source under `src/DemBones`). It is an automatic skinning decomposition that fits bones and weights to an animated mesh sequence, which suits turning a simulation or sculpt cache into a skinned, portable rig. [V for the bundling; K for what Dem Bones does]
+- Generalising these ideas beyond Maya is practice, not something the repo states. [K]
 
 ## 52. Facial rigging
 - Approaches: (1) blend shapes only (high fidelity, large data, easy export), (2) joints (bone) based (compact, game-friendly, needs good skinning), (3) hybrid (joints for jaw, eyes, tongue + shapes for fine expression). [K]

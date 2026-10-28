@@ -7,7 +7,7 @@ description: Simulation and FX craft - particle systems, rigid bodies, cloth, fl
 
 Covers: 72 Particle Systems, 73 Rigid-Body Simulation, 74 Cloth Simulation, 75 Fluid Simulation, 76 Smoke and Fire Simulation, 77 Hair and Fur Grooming, 78 Destruction Effects, 79 Physics-Based Animation.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## Simulation principles (apply to every sim)
 1. **Scale and units first.** Use real-world size and consistent time scale; sims behave wrongly if objects are miniature or enormous. [K]
@@ -70,6 +70,12 @@ Production practice: [K]
 - Shading: water IOR 1.33 (about 2% reflectance), absorption by depth, foam masks, underwater caustics, refraction. [V Filament IOR table; K]
 - Tools listed in awesome-blender: FLIP Fluids (add-on), Jet-Fluids, Molecular Script. [V]
 
+### Worked SPH settings [V SPlisHSPlasH@dba6b26 `data/Scenes/DoubleDamBreak.json`, `doc/FoamGenerator.md`, README]
+- Solvers offered: WCSPH, PCISPH, PBF, IISPH, **DFSPH**, PF; explicit and implicit viscosity; surface tension; vorticity; drag; two-way coupling with static and dynamic rigid bodies (rigid bodies via the PositionBasedDynamics library).
+- A dam-break scene uses: particle radius 0.025 m, rest density 1000 kg/m3, standard viscosity 0.01, gravity -9.81, CFL time stepping with factor 1 and a maximum step of 0.005 s, DFSPH with 2 to 100 iterations, density error limit 0.05 % and divergence error limit 0.1 % (both parameters are documented as percentages in `TimeStepDFSPH.cpp`), divergence solver on.
+- **Foam, spray and bubbles are a post-process** on the particle sequence (Ihmsen 2012; Bender 2019 turbulent micropolar). The tool recommends a 50 fps input sequence (default step 0.02 s); change the step if you cache at another rate. Foam particles use the fluid velocity field only, so give them a bounding box because there is no boundary handling.
+- Elastic solids can be skinned: a visual mesh is bound to the moving particles in a post-process.
+
 ## 76. Smoke and fire simulation
 Simplified grid model for fire (Ten Minute Physics #21, building on the Eulerian solver): [V]
 - Pipeline per step: modify velocities (buoyancy/lift, turbulence) -> make incompressible -> advect velocity and temperature -> modify temperature (burning, cooling).
@@ -81,6 +87,9 @@ Production: [K]
 - Art direction: sources (emitters with velocity/temperature), wind/force fields, colliders, vorticity, dissipation/cooling, upres/detail passes.
 - Real-time: flipbook/particle based fire & smoke with soft particles, vector fields, or low-res grid sims; fog volumes for ambient smoke. [V Godot volumetric fog (single scattering, FogVolumes), particles]
 - Scale cues: bigger flames and smoke plumes move slower in screen time (scale time with size). [K]
+
+### Tested note for scripted setups [T GN-1]
+- Instances produced by Geometry Nodes can be read back in Python as one point per instance with `instance_transform` and a reference index; useful for exporting scattered debris or particles to an engine.
 
 ## 77. Hair and fur grooming
 - Representation: **guide hairs** (curves) define flow; the system interpolates many **child strands** with clumping, roughness, frizz, length variation. Offline renderers use curves (ribbons/tubes) with a hair shading model (Marschner/d'Eon lineage: R, TT, TRT lobes); real time uses hair cards or strand rendering. pbrt-v4 includes a hair reflection model chapter (Reflection Models). [V pbrt-v4 contents list; K model names]

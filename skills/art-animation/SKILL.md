@@ -7,7 +7,7 @@ description: Keyframe animation craft and pipeline - curves, timing and spacing,
 
 Covers: 54 Keyframe Animation, 55 Animation Curves, 56 Timing and Spacing, 57 The 12 Principles of Animation, 58 Blocking and Polishing, 59 Body Mechanics, 60 Walk and Run Cycles, 61 Character Acting, 62 Facial Animation, 63 Object Animation, 64 Camera Animation, 65 Motion Capture, 66 Motion Retargeting.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified. Numerical frame counts are starting points to adapt per project and frame rate.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified. Numerical frame counts are starting points to adapt per project and frame rate.
 
 ## Craft first, tools second
 Animation quality comes from observation and decisions (what the character wants, how weight moves) more than from software. Always work from reference (video of yourself or real subjects), thumbnails, and a clear intent per shot. [K]
@@ -131,10 +131,22 @@ Walk: contact -> down -> passing -> up -> contact (other leg). [K]
   5. Validate with a standard motion test: T-pose, range-of-motion, walk, jump.
 - Add-ons/tools: Auto-Rig Pro retargeting (paid), Mixamo add-on, Godot importer-based retargeting. [V awesome-blender; V Godot]
 
+### Motion matching, with concrete values [V Motion-Matching@57b7250 `database.h`, `controller.cpp`]
+Daniel Holden's reference implementation (MIT code; the demo animation dataset is CC BY-NC-ND 4.0) matches a query vector against a database of pose features every few frames and blends with inertialisation.
+- **Feature vector** (each feature normalised by its mean and standard deviation, then weighted): foot positions (weight 0.75), foot velocities (1.0), hip velocity (1.0), future trajectory positions at +20, +40 and +60 frames (1.0), future trajectory directions (1.5). At the demo's 60 fps those offsets are 0.33, 0.67 and 1.0 s ahead.
+- **Timing**: search every 0.1 s (or forced when needed); inertialisation blend half-life 0.1 s; simulated desired-velocity and rotation half-lives 0.27 s; adjustment half-lives 0.1 s (position) and 0.2 s (rotation). Trajectory points are expressed in the character's root frame.
+- Changing feature weights changes the database, so features must be regenerated (and any learned networks retrained). *Learned Motion Matching* swaps the database for a decompressor network.
+- These are the demo's defaults for one dataset, not universal; treat them as a worked example to adapt, then tune weights by watching foot sliding and responsiveness. [K for the last clause]
+
 ## Runtime animation systems [V Godot AnimationTree]
 - AnimationPlayer holds clips; AnimationTree blends them: BlendTree (Blend2/Blend3, OneShot, Transition, TimeScale, filters for layered tracks), BlendSpace1D/2D for continuous parameters (speed, direction), and StateMachine for discrete states. Cross-fade time alone is limited in AnimationPlayer.
 - Layering: use filters so upper-body actions blend over locomotion; one-shots for attacks/gestures with fade in/out.
 - Root motion: extract translation from the animation to drive the character controller, or keep in-place cycles plus code-driven speed matched to stride. [K]
+
+### Delivering animation to glTF [V 3DC-Asset-Creation@3ba6cf7; T GLTF-1]
+- glTF clips are one-shot: looping is decided by the player, so make first and last keys match for loops. Blending between clips (crossfade, additive) is the engine's job, not the file's. Interpolation modes are STEP, LINEAR, CUBICSPLINE.
+- Baked ambient occlusion on parts that move becomes wrong; keep AO off moving parts or accept it.
+- Blender exporter defaults: sample all animations every 1 frame, remove duplicate keyframes, export active actions and NLA tracks. Remove unused animation data to save size.
 
 ## Quality gates
 - Silhouette readable at blocking stage; storytelling clear without polish.

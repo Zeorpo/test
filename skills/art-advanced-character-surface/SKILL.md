@@ -7,7 +7,7 @@ description: Advanced sculpting, anatomy and character design, advanced topology
 
 Covers: 80 Advanced Sculpting, 81 Anatomy and Character Design, 82 Advanced Topology and Deformation, 83 Advanced Shading, 84 Photorealism, 85 Stylized Art and Design.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified. Prerequisites: `art-modeling`, `art-surfacing`, `art-rigging`.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified. Prerequisites: `art-modeling`, `art-surfacing`, `art-rigging`.
 
 ## 80. Advanced sculpting
 - **Pipeline discipline**: concept/reference -> proportion block-in (low res) -> primary forms -> secondary forms -> tertiary detail -> retopo/bake -> texture. Do not skip levels; every level should survive being viewed alone. [K]
@@ -54,6 +54,10 @@ Advanced techniques: [K]
 - **Displacement**: true displacement/tessellation adds silhouette; keep scale and midlevel consistent; crease issues at hard edges (OpenSubdiv: infinitely sharp creases tear under displacement; use semi-sharp). [V OpenSubdiv]
 - **Procedural/triplanar blending, wetness, snow/dust layers**: mask-based layered materials driven by world normal, AO, curvature or vertex paint. [K]
 - **Shader complexity budgeting**: texture count and instruction count per material; use LOD materials and baked parameter maps at distance. [K]
+
+### Carrying advanced shading into a runtime [V meshoptimizer gltf README; V 3DC-Asset-Creation@3ba6cf7]
+- glTF can carry layered shading to real-time viewers through extensions that gltfpack passes through fully: `KHR_materials_sheen` (cloth, velvet), `clearcoat`, `anisotropy` (brushed metal, hair), `iridescence`, `transmission` with `volume` and `ior` (glass), `diffuse_transmission` (thin translucency), `dispersion`, `specular` and `emissive_strength`. Check the target viewer supports each one; unknown extensions are dropped by gltfpack.
+- Khronos lists subsurface scattering (diffuse transmission plus volumetric scattering for skin and wax) and Gaussian splatting among future directions; neither is a safe delivery path yet.
 
 ## 84. Photorealism
 Photorealism is controlled observation. Checklist: [K unless noted]

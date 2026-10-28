@@ -7,7 +7,7 @@ description: Asset management, production pipeline management and virtual produc
 
 Covers: 97 Asset Management, 98 Production Pipeline Management, 99 Virtual Production.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary of a page that could not be fetched directly (verify); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary of a page that could not be fetched directly (verify); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## 97. Asset management
 
@@ -16,6 +16,8 @@ An **asset** is a named, versioned, structured container of resources (geometry,
 
 ### Conventions that prevent chaos [K]
 - **Naming**: `<project>_<type>_<name>_<variant>_<version>`; prefixes by type (SM_ static mesh, SK_ skeletal, T_ texture, M_/MI_ material/instance, BP_ blueprint) if the engine uses them; no spaces or special characters; lower-case on Linux-based farms.
+  - A widely used Unreal style guide formalises this as `Prefix_BaseAssetName_Variant_Suffix`, with identifiers limited to `[A-Za-z0-9_]+` (no whitespace, backslashes, symbols or Unicode), generic variants as two-digit numbers (`Rock_01`, `Rock_02`), and its own prefixes (`S_` static mesh, noting that many teams use `SM_`; `SK_`, `M_`, `MI_`, `T_`, `BP_`). Folders: PascalCase, no spaces or Unicode, a top-level folder named after the project, a `Developers` folder for local tests, maps in a `Maps` folder, no folders called `Assets` or `AssetTypes`, no empty folders. [V ue5-style-guide@198a855]
+  - Khronos delivery guidance for filenames: `a-z`, `_`, `-`, `0-9`, start with a letter, separate words with `_` or `-`, never spaces. [V {KH}]
 - **Folder structure**: by project -> asset type -> asset -> department -> version; a single published location (`publish/`) separate from work-in-progress (`work/`).
 - **Versioning**: immutable published versions (v001...), a "latest" pointer (symlink or database field), changelogs, and approval states (WIP, pending review, approved, final). Never overwrite a published version.
 - **Dependencies**: record which versions of textures, rigs and caches a scene uses; prefer references with relative or logical paths over absolute paths.
@@ -25,14 +27,21 @@ An **asset** is a named, versioned, structured container of resources (geometry,
 
 ### Publishing and validation
 - Treat publishing as a gate: run automated validators (naming, transforms applied, no n-gons/non-manifold if forbidden, UVs present, texture sizes, material count, polycount, bone limits, file size) and block bad publishes.
-- **Pyblish** is an open-source, test-driven validation framework for CG/VFX publishing (collect -> validate -> extract -> integrate). [V awesome-cg-vfx-pipeline]
+- **Pyblish** is an open-source, test-driven validation framework for CG/VFX publishing (collect -> validate -> extract -> integrate). Its plugin order constants are `CollectorOrder = 0`, `ValidatorOrder = 1`, `ExtractorOrder = 2`, `IntegratorOrder = 3`, so validators always run on collected data and before anything is written. The base package is host-agnostic; `pyblish-maya`, `pyblish-qml` (UI) and `pyblish-starter` (example pipeline) build on it. `pip install pyblish-base`. [V pyblish-base@f6c1db6 `pyblish/plugin.py`, README]
 - Keep validators small, data-driven, with clear error messages and auto-fix when safe. [K]
 
 ### Scene description and interchange [V OpenUSD glossary; V glTF; V awesome-cg-vfx-pipeline]
 - **OpenUSD**: composition arcs (sublayers, references, payloads, variants, inherits, specializes, relocates) assemble scenes non-destructively; opinion strength order LIVERPS (Local, Inherits, VariantSets, Relocates, References, Payload, Specializes); inherits stay "live" through arbitrary levels of referencing while references encapsulate their targets; payloads are references that can be deferred (stage opened with LoadNone records but does not traverse them) so users load only the parts they need.
 - **Model hierarchy / Kind**: `kind` classifies prims (model, group, assembly, component, subcomponent) to form an index of important subtrees ("table of contents"); only group models may contain other model prims.
 - **Purpose**: `default`, `render`, `proxy`, `guide` gates traversal (e.g., proxy for lightweight display, render for final quality).
-- **Guidelines for asset structure** (ASWF USD Working Group; NVIDIA Learn OpenUSD): asset entry points and interfaces, prim hierarchy organization, layer stacks for parallel department work; the working group taxonomy uses component/assembly/group; there is no universally best structure. [S]
+- **Guidelines for asset structure** (ASWF USD Working Group, now read in full: `docs/asset-structure-guidelines.md` in usd-wg/assets@3b75c2d) [V]:
+  - Published models use the *component* or *assembly* kind; *group* only organises assemblies and keeps the model hierarchy valid (not used at the root of a published asset). Published models inherit from a *class* prim so overrides can be broadcast to every instance of the asset.
+  - A **component** keeps geometry behind a *payload*, is self-contained (materials from a global library are the usual exception), has an Xformable root set as `defaultPrim`, and is organised with Scopes (cheaper than Xforms and no accidental transforms) named `geo` and `mtl`; under `geo`, `proxy` and `render` scopes carry the purpose (set purpose on the parent scope, not per prim). Texture maps for materials defined in the component live with the component.
+  - An **assembly** references components or other assemblies; payloads buy nothing when the components already have them. New geometry made by an assembly goes behind its own payload with component kind.
+  - Minimum viable asset on disk: `asset.usd` plus `payload.usd`; keep the `.usd` extension so layers can switch between ASCII and binary without rewriting references; store layers in child directories with relative paths for portability; split layers by department.
+  - Start with two variant sets, one for geometry and one for materials, and keep them selectable on the model root so they work when instanced or when the payload is unloaded.
+  - GeomSubsets are fine for material splits but cannot be transformed or activated like mesh prims; relationships such as `material:binding` must target prims beneath the referenced prim or they are cleared.
+  - Opinion strength: that guide writes LIVRPS while the OpenUSD glossary writes LIVERPS (the E is Relocates); the glossary is the newer reference.
 - **glTF** is the runtime/transmission format (PBR metallic-roughness, skins, morphs, animation, extensions such as KHR_materials_*, KHR_texture_basisu, mesh compression). **Alembic** for baked geometry/animation caches; **OpenVDB** for volumes; **OpenEXR** for images; **MaterialX/OpenPBR** for materials; **OpenColorIO** for color; **OpenTimelineIO** for editorial. [V awesome-cg-vfx-pipeline; V glTF]
 - Pick one source-of-truth format per department and a defined conversion path to the runtime format; test the roundtrip regularly.
 
@@ -85,6 +94,9 @@ Virtual production (VP) brings real-time CG into live-action capture. Epic Games
 
 ### Skills to build for VP [K]
 Real-time optimization (see `art-vfx-realtime`), camera and lens knowledge (`art-camera-color-render`), color science (OCIO/ACES), tracking/calibration, networked rendering, and live production communication with DP, director, gaffer and VAD/ops.
+
+### Runnable pipeline checks [T]
+- The same machinery that validates this library validates assets: glTF Validator exit codes (`tests/gltf/check.mjs`), a Blender claims suite you can run in the studio's own Blender (`tests/blender/claims.py`), and a naming/structure linter pattern (`tests/lint_skills.py`). Treat a failing check as a blocked publish, as Pyblish's ordering does.
 
 ## Quality gates
 - Naming/versioning/metadata conventions documented and enforced by validators on publish.

@@ -7,7 +7,7 @@ description: Lighting craft and theory for offline and real-time 3D - fundamenta
 
 Covers: 28 Lighting Fundamentals, 29 Three-Point Lighting, 30 HDRI Lighting, 31 Light and Shadow Control, 32 Reflections and Refractions, 33 Global Illumination, 34 Volumetric Lighting.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified here.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified here.
 
 ## 28. Lighting fundamentals
 
@@ -90,6 +90,11 @@ Practice: [K]
 - Interiors: use portals (windows) to guide sampling, add indirect bounces, and denoise. Clamp indirect samples to reduce fireflies but accept bias.
 - Fireflies come from rare high-energy paths (e.g., small bright light via glossy bounce); fix by clamping, softening sources, or increasing samples before clamping.
 - Light leaking in baked/voxel GI at thin walls: thicken walls, add occluders, adjust bias.
+
+### How baked lighting is stored [V BakingLab@c3868af README; blog series by the author]
+- BakingLab compares ways to store pre-computed light in 2D lightmaps: scaled irradiance, the Half-Life 2 basis (three directional lobes), L1 and L2 spherical harmonics, L1 and L2 H-basis, and spherical Gaussians with 5, 6, 9 or 12 lobes. Directional bases let baked light respond to normal maps and give some baked specular, while plain irradiance cannot. [K]
+- Baking is progressive with an Embree path tracer, and a ground-truth mode renders the same scene with the path tracer so you can compare any baked encoding against a reference. Do the same in your own pipeline: keep a path-traced reference frame to judge a bake.
+- Engine support varies; check what the target engine can sample before choosing an encoding. [K]
 
 ## 34. Volumetric lighting
 - Participating media scatter and absorb light. Fog density in real-time engines is often exponential (transmittance `exp(-density * d)`). [V Godot volumetric fog]

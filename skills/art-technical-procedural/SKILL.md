@@ -7,13 +7,14 @@ description: Technical art foundations - node-based geometry (Geometry Nodes), p
 
 Covers: 86 Geometry Nodes, 87 Procedural Workflows, 88 Shader Programming, 89 Python Scripting.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## 86. Geometry Nodes (node-based procedural geometry)
 Mental model: [K]
 - A node tree transforms **geometry** (mesh, curves, point cloud, volume, instances, grease pencil) using **attributes** (data on points, edges, faces, face corners, curve control points, instances) and **fields** (functions evaluated per element on demand). Instances are lightweight references to geometry; "realize instances" converts them to real geometry when needed.
 - Blender's evaluated geometry is held in a `GeometrySet` with components: mesh, pointcloud, curves, volume, grease_pencil (and instances). Access evaluated geometry from the depsgraph-evaluated object (`ob_eval.evaluated_geometry()`); `mesh_base` gives the mesh before final subdivision. [V Blender Python API example GeometrySet.0]
-- Reading instances from Python: `geometry.instances_pointcloud()` holds one point per instance; `geometry.instance_references()` lists what is instanced (objects, collections or nested GeometrySets); attribute `instance_transform` (4x4) and `.reference_index` map each instance to its reference. [V GeometrySet.0 example]
+- Reading instances from Python: `geometry.instances_pointcloud()` holds one point per instance; `geometry.instance_references()` lists what is instanced (objects, collections or nested GeometrySets); attribute `instance_transform` (4x4) and `.reference_index` map each instance to its reference. [V GeometrySet.0 example; T GN-1]
+- **Keep the GeometrySet alive.** `ev.evaluated_geometry().instances_pointcloud().points` in one expression raises `ReferenceError: StructRNA of type PointCloud has been removed` because the temporary GeometrySet is freed; assign `geo = ev.evaluated_geometry()` and use `geo` while you read. [T GN-2, Blender 5.2.3]
 - Node set at v5.2.3 (270 geometry node source files) [V blender/blender v5.2.3 `source/blender/nodes/geometry/nodes/`]: simulation, repeat, bake and for-each-element zones; closures and bundles; lists (field to list, filter/sort list); menu switch; volume grids and SDF grids (mesh to SDF, SDF boolean/fillet/offset, grid voxelize, advect, Poisson solve); importers (OBJ, PLY, STL, CSV, VDB, text); UV Unwrap and Pack Islands; Raycast, Sample Nearest Surface, Proximity; an **XPBD solver** node; tool-only nodes (3D cursor, selection, face sets) for node-based tools. Main (5.4 alpha) has 288; check node availability against the user's version.
 Core patterns: [K]
 1. **Distribute and instance**: distribute points on surface (random, Poisson disk) -> filter with selection fields (slope, height, vertex group, noise) -> instance on points -> rotate to align with normal, randomize scale/rotation -> realize only if needed.
@@ -67,6 +68,10 @@ Key techniques: [K]
 - **Debugging**: output intermediate values as color, use constant-color tests, frame debuggers (RenderDoc), validate on target GPUs. [K]
 Cross-tool: Blender shader nodes map to BSDF nodes (OSL available for CPU Cycles); MaterialX provides a node-graph material interchange; engine shading languages differ (GLSL, HLSL, MSL, WGSL, Godot shading language). [K; V MaterialX/OpenPBR repos]
 
+### Shader libraries and learning material [V lygia@aa7580b; V 3d-game-shaders-for-beginners@2970085]
+- **LYGIA** is a granular shader function library that ships the same module tree for GLSL, HLSL, Metal (MSL), WGSL/WESL and CUDA. Folders: `animation`, `color` (blend, tonemap, luma, LUT, Oklab mixing, dither, white balance, daltonize), `distort`, `draw`, `filter`, `generative` (cnoise, curl, fbm, gnoise, psrdnoise, snoise, srandom, voronoi, worley, gerstnerWave), `geometry`, `lighting` (pbr, fresnel, shadow, ssao, ssr, spherical harmonics, volumetric scattering, iridescence), `math`, `morphological` (dilation, erosion, jump flood), `sample` (bicubic, triplanar, normalFromHeightMap, shadow PCF, untile), `sdf`, `simulate`, `space` (tbn, parallaxMapping, rotate, tiles, polar). Include only what you use to keep shaders small.
+- **3D Game Shaders For Beginners** teaches, one chapter per technique: GLSL basics, render-to-texture, texturing, lighting, Blinn-Phong, fresnel factor, rim lighting, normal mapping, gamma correction, fog, blur, bloom, SSAO, depth of field, motion blur, chromatic aberration, screen-space reflection and refraction, cel shading, outlining, posterization, pixelization, lookup tables, flow mapping, foam, deferred rendering, film grain, sharpen, dilation. It targets Panda3D, so treat the engine glue as specific and the maths as general. (Last updated 2021.)
+
 ## 89. Python scripting (Blender as the reference environment)
 Foundations: [V Blender Python API examples; K]
 - Data model: `bpy.data` (all datablocks: objects, meshes, materials, images), `bpy.context` (active state), `bpy.ops` (operators, depend on context; use sparingly in tools), `bpy.types` (classes: Operator, Panel, Menu, PropertyGroup, AddonPreferences).
@@ -80,8 +85,8 @@ Foundations: [V Blender Python API examples; K]
 - **Gotchas from the official API guide** [V blender/blender v5.2.3 `doc/python_api/rst/info_gotcha*.rst`, `info_advanced_blender_as_bpy.rst`]:
   - **No Python threads.** They crash Blender in hard-to-diagnose ways; threads may only run while the main thread is blocked (e.g., `join()` before the script ends). Use `multiprocessing` for independent work.
   - **Undo/redo invalidates every ID and its sub-data**, and adding many items to a collection can reallocate it. Never keep references to Blender data across these; store indices or names and re-fetch from the context.
-  - **Names are not guaranteed**: new data may be renamed (too long, duplicate, empty). Keep your own mapping to created objects; linked libraries can have name collisions.
-  - **Stale values**: evaluation is deferred, so after setting `location` call `view_layer.update()` before reading `matrix_world`.
+  - **Names are not guaranteed**: new data may be renamed (too long, duplicate, empty). Duplicates get a `.001` suffix [T PY-1]; an 80-character name was accepted unchanged in 5.2.3 [T PY-1], so do not hard-code an older length limit. Keep your own mapping to created objects; linked libraries can have name collisions.
+  - **Stale values**: evaluation is deferred, so after setting `location` call `view_layer.update()` before reading `matrix_world` (verified: 0.0 before, 5.0 after) [T PY-2].
   - **Edit Mode**: `obj.data` is out of sync while editing; use `bmesh.from_edit_mesh`, or exit Edit Mode first.
   - **Faces**: edit with BMesh; export with `mesh.polygons`; use `mesh.loop_triangles` only to export to formats without n-gons.
   - **Operators**: they can't take data arguments, return only a status, and fail `poll` without saying why; read the poll function's source when stuck.

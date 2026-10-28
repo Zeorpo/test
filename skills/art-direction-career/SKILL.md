@@ -7,7 +7,7 @@ description: Visual and cinematic storytelling, art direction, advanced look dev
 
 Covers: 100 Visual Storytelling, 101 Art Direction, 102 Cinematic Storytelling, 103 Advanced Look Development, 104 Scene Optimization, 105 Portfolio Development, 106 Specialized Workflow Mastery, 107 Professional Production and Collaboration, 108 Creative Direction and Artistic Mastery.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified. Most of this track is craft judgment rather than documented specification, so [K] dominates; the technical sub-topics (look-dev tooling, optimization) link to verified skills.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified. Most of this track is craft judgment rather than documented specification, so [K] dominates; the technical sub-topics (look-dev tooling, optimization) link to verified skills.
 
 ## 100. Visual storytelling
 - **Show, don't tell**: every frame answers *who, where, what do they want, what is the mood*. Use staging, posing, props, color and light to carry story information. [K]

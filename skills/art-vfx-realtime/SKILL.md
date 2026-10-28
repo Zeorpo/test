@@ -7,7 +7,7 @@ description: VFX and advanced compositing, render passes and AOVs (OpenEXR, Cryp
 
 Covers: 90 Visual Effects (VFX), 91 Advanced Compositing, 92 Render Passes and AOVs, 93 Real-Time Rendering, 94 Unreal Engine Workflows, 95 Optimization and Level of Detail (LOD), 96 Texture Baking.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[K]** established practice, not re-verified. Epic's Unreal documentation and Blender's manual were blocked in this session; Unreal content below is mostly [S]/[K].
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified. Epic's Unreal documentation and Blender's manual were blocked in this session; Unreal content below is mostly [S]/[K].
 
 ## 90. Visual Effects (VFX)
 The VFX shot pipeline (typical): [K]
@@ -97,6 +97,23 @@ LOD authoring workflow: [K]
 5. Ensure collision/physics use simple shapes independent of LOD.
 6. Validate triangles, draw calls, GPU ms at target hardware and resolution.
 
+### Mesh optimisation and LOD generation with meshoptimizer [V meshoptimizer@f0a684f README; T PACK-1..3]
+Core pipeline, order matters: (1) indexing, (2) vertex cache optimisation, (3) optional overdraw optimisation, (4) vertex fetch optimisation, (5) vertex quantisation, (6) index filtering, (7) optional shadow indexing.
+- **Indexing**: remove redundant vertices by binary equivalence of all vertex bytes; floating-point drift in normals or tangents creates extra vertices, so quantise those first or use a custom remap with a tolerance.
+- **Overdraw optimiser** takes a threshold (1.05 means the vertex-cache hit ratio may get at most 5% worse). It does not help tile-based deferred mobile GPUs (PowerVR, Apple); measure on vertex-heavy scenes.
+- **Quantisation**: 3x8-bit or 10-10-10 SNORM normals; positions as half floats or 16-bit normalised integers (glTF `KHR_mesh_quantization`).
+- **Simplification** (`meshopt_simplify`): target error is normalised to 0-1 of mesh extents (1e-2 = 1%); target index count is a ratio (for example 0.2). Weld identical vertices first or it gets stuck on faceted or seam-heavy meshes. It reports the resulting error, which can drive LOD choice. `meshopt_simplifySloppy` ignores topology and gives worse geometry and attributes.
+- **Attribute-aware**: pass normals (weight about 1.0) and optionally UVs (weight about 10-100 depending on UV density); combine with the permissive option and `vertex_lock` to protect UV seams, which gives much better LODs than sloppy mode.
+- **Screen-space LOD selection**: `d = max(0, distance(camera, mesh_center) - mesh_radius); e = d * (tan(fovy/2) * 2 / screen_height)` is one pixel in mesh space; a LOD is acceptable when `e * lod_factor >= lod_error`.
+- **Shared vertex buffer for all LODs**: optimise each LOD for vertex cache, concatenate indices starting from the coarsest, then run vertex fetch optimisation once; this avoids penalising mobile GPUs that transform a sequential range.
+- **Meshlets**: NVIDIA suggests 64 vertices and 126 triangles; some AMD GPUs prefer equal limits such as 64/64; cone weight 0 if no cone culling, about 0.25 when used.
+- **gltfpack** (`npm i gltfpack`, v1.3.0): `-si R` simplify to ratio R, `-cc` meshopt compression, `-tc` KTX2/Basis textures, `-tw` WebP, `-mi` mesh instancing, `-kn -km -ke` keep named nodes/materials/extras, `-vpf` float positions. Quantisation is on by default. Vendor extensions and Draco are not supported. On a 16,128-triangle Blender UV sphere, `-si 0.25` gave exactly 4,032 triangles, `-cc` brought 366 KB down to 18 KB, and the Khronos Validator reported 0 errors and 0 warnings for every output. [T PACK-0..3]
+
+### Engine-side asset rules from a widely used style guide [V ue5-style-guide@198a855, UE4 text on master; a `v2` branch targets UE5 and was not read]
+- Every mesh should have UVs, no overlapping UVs where lightmaps are used, correct LODs where it is seen at varying distances, collision (it also helps bounds, occlusion and lighting) and correct scale (scaling in the level is an override, not a fix).
+- Modular socketless pieces snap cleanly to the project grid; the Marketplace requirement is a clean snap at a 10 unit grid or larger.
+- Static mesh prefix in that guide is `S_` ("many use SM_"); skeletal `SK_`, material `M_`, material instance `MI_`, texture `T_`.
+
 ## 96. Texture baking
 Maps and their purpose: [K]
 - **Normal map** (tangent space) from high to low poly; **object-space normal** for static or deforming-free assets; **AO** (ambient occlusion), **curvature** (edges/convexity), **thickness**, **position** (object/world), **world-space normal**, **ID/color ID** masks, **height/displacement**, **bent normals**, and **cavity**; baked lighting: **lightmaps**, **vertex AO**, **emission/GI**.
@@ -118,7 +135,12 @@ Lightmap baking (Godot as concrete reference): [V Godot LightmapGI]
 - Light bake mode per light (disabled/static/dynamic) controls whether it is baked.
 Export/import hygiene for engines: [V Godot model export considerations]
 - Blender glTF exporter defaults worth knowing [V glTF-Blender-IO e03d6603]: +Y Up on; Normals and UVs on; **Tangents off**; Shape Keys on (shape key normals on, tangents off); Skinning on with **4 bone influences** (more is allowed but "models may appear incorrectly in many viewers"); Deformation Bones Only off; animations exported, **always sampled** at 1 frame step with duplicate keys removed; Punctual Lights, Cameras and Custom Properties (extras) off; Draco compression off; GPU instancing (EXT_mesh_gpu_instancing) off.
-- Triangulate before export to avoid unpredictable engine triangulation: Triangulate modifier plus the glTF exporter's Apply Modifiers (off by default), or, for meshes with shape keys, apply triangulation on a copy, because Apply Modifiers prevents exporting shape keys [V glTF-Blender-IO]. Also apply transforms, and use the engine's axis conventions (Godot: right-handed, Y-up, camera forward -Z, asset front +Z; in Blender an asset's front is -Y).
+- Triangulate before export to avoid unpredictable engine triangulation [V Khronos: glTF has triangles only]: Triangulate modifier plus the glTF exporter's Apply Modifiers (off by default), or, for meshes with shape keys, apply triangulation on a copy, because Apply Modifiers prevents exporting shape keys [V glTF-Blender-IO]. Also apply transforms, and use the engine's axis conventions (Godot: right-handed, Y-up, camera forward -Z, asset front +Z; in Blender an asset's front is -Y).
+
+### Delivery checks you can run [T PACK-0, GLTF-1, GLTF-2]
+- Validate every glTF/GLB with the Khronos glTF Validator (`npm i gltf-validator`; `validateBytes`) and require 0 errors. [V glTF-Validator@602c540; T PACK-0]
+- Re-import the exported file and compare triangle count, morph target count and animation clips with the source; a mismatch is a finding, not noise. [T GLTF-2 shows Apply Modifiers dropping shape keys]
+- Note: the pip `bpy` build has no Draco or meshopt libraries, so use gltfpack for compression in automated pipelines. [T tests/README]
 
 ## Quality gates
 - AOV set documented and verified (recombination equals beauty; data passes unfiltered float).

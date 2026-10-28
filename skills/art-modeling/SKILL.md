@@ -7,7 +7,7 @@ description: Polygon, subdivision, hard-surface, organic, sculpt, retopology, bo
 
 Covers: 8 Polygon Modeling, 9 Topology, 10 Hard-Surface, 11 Organic, 12 Subdivision, 13 Digital Sculpting, 14 Retopology, 15 Boolean, 16 Procedural, 17 Modifiers and Non-Destructive Modeling.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[K]** established practice, not re-verified here.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified here.
 
 ## Decision frame: pick the representation first
 | Need | Prefer | Why |
@@ -24,6 +24,14 @@ Core operations: extrude, inset, bevel, loop cut/edge slide, knife, bridge, merg
 - Model at real scale with transforms applied; mirror symmetric parts and instance repeats. [K]
 - Keep density proportional to curvature and screen coverage: flat regions need few polygons, tight curvature needs more. [K]
 - Clean-up checklist before handoff: merge by distance, no loose verts/edges, no zero-area faces, consistent normals, no non-manifold edges unless required. [K]
+
+### Delivery hygiene for assets that leave the DCC [V 3DC-Asset-Creation@3ba6cf7, asset-creation-guidelines 1.0 sec03_Geometry and 2.0 summary]
+- glTF stores triangles only; quads and n-gons are triangulated on export, so model in quads for editing and inspect the triangulation before delivery.
+- "Black" faces mean overlapping faces or wrong normals: recalculate normals and remove overlaps. Bevel product edges, since real edges are never perfectly sharp; use face-weighted normals to keep rounded edges clean.
+- Model parts the way the real object is built (separate pieces), not as one complex mesh. Keep meshes watertight except for hidden interior faces; any back face that can be seen needs thickness, because single-sided faces are culled from behind.
+- Real-world scale 1:1, glTF 1 unit = 1 m, product origin at bottom centre (a ceiling product may use top centre); right-handed axes for glTF and USDZ. Small objects can be modelled in cm or inches and converted to metres on export.
+- Reuse identical parts as instances (one copy of mesh data), but baked ambient occlusion on instanced parts conflicts.
+- Weld duplicate vertices before any decimation: the simplifier follows mesh topology and gets stuck on faceted or seam-heavy meshes [V meshoptimizer@f0a684f]. See `art-vfx-realtime` topic 95 for the simplification API.
 
 ## 9. Topology
 - Edge flow should follow the surface's form and the directions it will deform. Loops encircle joints (elbows, knees, mouth, eyes); a few extra loops at bending areas preserve volume. [K]

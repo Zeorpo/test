@@ -1,6 +1,6 @@
 # art
 
-Research-backed skill notes for 3D art, from first principles to production. This branch (`art`) holds only the `skills/` library and its source ledger. No project code is built here.
+Research-backed skill notes for 3D art, from first principles to production. This branch (`art`) holds the `skills/` library, its source ledger (`SOURCES.md`), a router skill that applies the right skill at the right stage, and tests that check the claims. No 3D project is built here.
 
 Each skill is a `SKILL.md` with: scope, core principles with concrete numbers, workflow, failure modes with diagnosis, quality gates, a practice path, and sources.
 
@@ -11,10 +11,15 @@ Every claim in a skill carries a tag so you can see how much to trust it.
 | Tag | Meaning |
 |---|---|
 | **[V]** | Read directly from a primary source (a specification, official docs or source code in a public GitHub repo) during this research session. Repo and commit are in [SOURCES.md](SOURCES.md). |
+| **[T]** | Executed in this repo's tests and passed: real Blender 5.2.3 (via `bpy`), the Khronos glTF Validator, gltfpack. The test ID is cited, for example `[T GLTF-2]`; see [tests/README.md](tests/README.md). |
 | **[S]** | Taken from a web-search summary of a page that could not be fetched directly. Verify before relying on it. |
 | **[K]** | Established industry practice written from general knowledge. Not re-verified here. Treat numbers as starting points. |
 
 Where the network blocked the original docs (Blender manual, pbrt.org, Epic docs, Polycount), the skills say so and point to the exact place to verify.
+
+## Start here: the router
+
+[art-router](skills/art-router/SKILL.md) is read first for any 3D art task. It decides which production stage you are at (brief, blockout, modeling, low poly and UVs, bake, texture, rig, animate, FX, light, render, engine, publish, tooling, career), picks the lead skill and up to three supporting skills, sends defect reports to the Failure modes tables, and names the exit check for the stage. `CLAUDE.md` makes a Claude Code session read it automatically. The routing table behind it is `tests/router/routes.json`.
 
 ## Skills and the 108 topics they cover
 
@@ -44,9 +49,21 @@ Where the network blocked the original docs (Blender manual, pbrt.org, Epic docs
 5. `art-advanced-character-surface` -> `art-technical-procedural` -> `art-vfx-realtime` -> `art-pipeline-production` (depth and delivery).
 6. `art-direction-career` throughout; revisit at every milestone.
 
+## Tests and what they show
+
+| Check | Result when last run (2026-10-28) |
+|---|---|
+| `tests/lint_skills.py` (structure, 108-topic coverage, tags, cited tests and commits, router in sync) | 17 of 17 pass |
+| `tests/blender/claims.py` (Blender 5.2.3) | 12 of 12 pass |
+| `tests/gltf/check.mjs` (gltfpack + Khronos Validator) | 4 of 4 pass |
+| `tests/router/run_tests.py tuning` (300 prompts the router was tuned on) | lead skill 91%, stage 86% |
+| `tests/router/run_tests.py holdout` (64 prompts it never saw) | lead skill 75%, stage 64%, **below the 85% and 75% targets** (first run 73%; it moved to 75% after the skills' text was upgraded, because retrieval reads that text) |
+
+The router tests are a regression check on the routing table. They are not the router; the skill is, and no automated test of the skill's own judgement has been run. Details and method: [tests/router/README.md](tests/router/README.md).
+
 ## Known limits
 
-- Only GitHub was reachable during research. The Blender manual, pbrt.org, Epic documentation, Polycount, OpenUSD web docs, NVIDIA Learn OpenUSD and the ASWF wiki were blocked; their content appears only as [S] or [K].
+- Only GitHub and the package registries (PyPI, npm) were reachable. The Blender manual, pbrt.org, Epic documentation, Polycount, OpenUSD web docs, NVIDIA Learn OpenUSD and the ASWF wiki were blocked; Blender behaviour is now backed by its source code and by running it, but the manual's prose has not been read.
 - Unreal Engine guidance is the thinnest, because Epic's documentation could not be read. Re-check it against the engine version you target.
 - The animation, anatomy, cinematography and art-direction topics rest on craft books and practice rather than specifications, so they are mostly [K].
 - Frame counts, ratios and polygon budgets are starting points, not rules.

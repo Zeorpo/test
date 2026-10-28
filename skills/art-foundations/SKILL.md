@@ -7,7 +7,7 @@ description: Foundations of 3D space and visual design - coordinate systems, han
 
 Covers: 1 3D Space and Navigation, 2 Form and Shape, 3 Proportions, 4 Perspective, 5 Composition, 6 Color Theory, 7 Basic Geometry.
 
-Source tags: **[V]** = read in this research session from a primary source (see `/SOURCES.md`); **[K]** = established industry knowledge, not re-verified here. Treat [K] numbers as starting points to check against the production's own documentation.
+Source tags: **[V]** = read in this research session from a primary source (see `/SOURCES.md`); **[T]** = executed and passed in `tests/`; **[K]** = established industry knowledge, not re-verified here. Treat [K] numbers as starting points to check against the production's own documentation.
 
 ## 1. 3D space and navigation
 
@@ -82,6 +82,10 @@ Fast, deliberate navigation is a measurable production skill. [K, generic to DCC
 - Triangles: every renderer ultimately draws triangles; quads and n-gons are authoring conveniences. Non-planar quads triangulate ambiguously. [K]
 - Euler characteristic and manifold checks: a closed manifold mesh has every edge shared by exactly two faces. Non-manifold edges break booleans, sims and sculpting. [K]
 - Bounding volumes (AABB, sphere) drive culling and collision broad-phase; tight, axis-aligned pivots keep them small. [V Godot occlusion culling notes AABB testing]
+
+### Delivery-oriented starting rules [V 3DC-Asset-Creation@3ba6cf7]
+- Start every asset from reference photos and real measurements; build at 1:1 real-world size; upright and facing forward at the origin (bottom centre for products). glTF and USDZ are right-handed with 1 unit = 1 m.
+- Name files with `a-z`, `0-9`, `_` and `-`, starting with a letter, no spaces.
 
 ## Workflow checklist: starting any asset
 1. Confirm target engine/format conventions (up axis, units, handedness, UV origin, tangent space). Write them in the asset README.

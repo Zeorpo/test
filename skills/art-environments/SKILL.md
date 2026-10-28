@@ -7,7 +7,7 @@ description: Environment art - environment and architectural modeling, landscape
 
 Covers: 67 Environment Modeling, 68 Architectural Modeling, 69 Landscape and Terrain Creation, 70 Set Dressing, 71 Procedural Environments.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary (verify); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## Environment design frame
 An environment must (1) tell a story about the place and its history, (2) guide the eye and gameplay/camera, (3) read at scale, and (4) fit budget. Work in passes: reference and mood boards -> top-down layout and sightlines -> greybox/blockout at real scale -> modular kit -> hero assets -> dressing -> lighting/atmosphere -> optimization. [K]
@@ -66,6 +66,11 @@ Games: modular walls with lightmap UVs, occluder volumes per room (occlusion cul
 - Determinism and iteration: seeds, versioned parameters, ability to lock hand-placed overrides; bake outputs for engines; keep a "procedural to static" export path. [K]
 - Performance: instance rather than realize geometry; keep instance counts bounded; add culling distances; precompute heavy generation offline. [V Godot instancing notes]
 - Validate: heatmap of density, collision/overlap checks, navigability tests, silhouette from key cameras.
+
+### Wave Function Collapse for layouts [V DeBroglie@27b37fa README and docs/articles]
+- WFC generates output locally similar to a sample bitmap or a tileset's adjacency rules. The original gives up on a contradiction; **DeBroglie** (C#) adds full backtracking and *non-local* constraints (properties of the whole output), and works on 2D tiles, hex grids and 3D voxels.
+- Constraint types documented: **border** (limit which tiles appear in regions such as edges; it only bans tiles at initialisation), **fixed tile** (force a tile at a location), and **path constraints** (connectivity such as roads). Several constraints can conflict, and turning backtracking on helps.
+- Author adjacency and rotations explicitly; use pickers to control which cell and tile is chosen next. For game levels, keep generated output as a layout and place hand-made art on top. [K for the last point]
 
 ## Budgets and optimization for environments [V Godot docs]
 - Frustum culling is automatic; occlusion culling needs baked occluders and works best for indoor scenes with many smaller rooms; combine with mesh LOD and visibility ranges.

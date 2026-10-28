@@ -1,0 +1,4705 @@
+{
+ "stages": [
+  "brief",
+  "blockout",
+  "modeling",
+  "lowpoly_uv",
+  "bake",
+  "texture",
+  "rig",
+  "animate",
+  "fx",
+  "light",
+  "render",
+  "engine",
+  "publish",
+  "tooling",
+  "career",
+  "none"
+ ],
+ "cases": [
+  {
+   "id": "D01",
+   "prompt": "Which way is up in Blender compared to Godot and what unit should I model in so the scale comes out right?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D02",
+   "prompt": "I keep drawing objects with wonky perspective, how do I set up a vanishing point grid before I block anything?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D03",
+   "prompt": "Explain complementary versus analogous color schemes for my environment's mood",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D04",
+   "prompt": "How do I think about primary secondary tertiary shapes when planning a new prop?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D05",
+   "prompt": "How should I route edge loops around the eye so it deforms nicely and stays quad-based?",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-rigging"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D06",
+   "prompt": "What's the best way to do a clean boolean cut for a vent on a hard-surface panel without ngon mess?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D07",
+   "prompt": "Retopologize my zbrush sculpt into a game-ready low poly with good edge flow",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D08",
+   "prompt": "Set up a bevel + mirror + subdivision modifier stack that I can edit non-destructively",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D09",
+   "prompt": "My UV islands are stretched and the texel density is inconsistent across the car",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D10",
+   "prompt": "How do I make a worn painted metal PBR material with edge wear and scratches in Substance Painter?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D11",
+   "prompt": "What should metallic and roughness maps look like, and which channels do I pack for ORM?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D12",
+   "prompt": "Create a procedural brick shader with variation in the node editor",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D13",
+   "prompt": "Set up three point lighting for a product turntable",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D14",
+   "prompt": "How do I light a night exterior scene with neon signs and fog so it has depth?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D15",
+   "prompt": "My HDRI makes everything look flat, how do I add a key light while keeping the environment reflections?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D16",
+   "prompt": "Explain global illumination and when to use baked light probes versus ray traced GI",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D17",
+   "prompt": "What focal length and aperture should I use for a shallow depth of field portrait render?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D18",
+   "prompt": "My renders look washed out, should I use Filmic AgX or ACES view transform?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D19",
+   "prompt": "How do I composite render passes and color grade the final image in Nuke or the Blender compositor?",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D20",
+   "prompt": "Cycles takes forever, how many samples do I need and how do I denoise?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D21",
+   "prompt": "Build an IK/FK switch for an arm with a pole vector",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D22",
+   "prompt": "Weight painting the shoulder gives me candy wrapper twist, how do I fix the skinning?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D23",
+   "prompt": "Set up facial blend shapes and a control panel for lip sync",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D24",
+   "prompt": "How do I parent a wheel and make a hierarchy so the pivot is at the axle?",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-foundations"
+   ],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D25",
+   "prompt": "Make a convincing walk cycle with correct contact and passing poses",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D26",
+   "prompt": "My animation feels floaty, how do I fix timing and spacing on a bouncing ball?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D27",
+   "prompt": "Clean up this mocap data and retarget it to my rig",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [
+    "art-rigging"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D28",
+   "prompt": "How do I block a dialogue shot with acting choices before polishing curves?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D29",
+   "prompt": "Model a medieval street with a modular kit of walls and roofs",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D30",
+   "prompt": "Create a rocky mountain terrain with erosion and scatter pine trees across it",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D31",
+   "prompt": "How should I dress a cluttered workshop interior so it tells a story?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D32",
+   "prompt": "Generate a procedural city layout with roads and buildings",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D33",
+   "prompt": "Simulate a cloth flag blowing in wind without it exploding",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D34",
+   "prompt": "How do I set up smoke and fire with good resolution and caching?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D35",
+   "prompt": "My rigid body destruction of a wall looks fake, how do I add debris and fracture constraints?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D36",
+   "prompt": "Groom realistic hair for a character using guide curves and clumping",
+   "primary": "art-simulation-fx",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D37",
+   "prompt": "How should I sculpt anatomy of the torso and shoulders for a realistic male figure?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D38",
+   "prompt": "Set up a layered skin shader with subsurface scattering and pores for a photoreal face",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D39",
+   "prompt": "I want a stylized hand-painted look like Arcane for my character",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D40",
+   "prompt": "How do I make cloth shading with sheen and fuzz for a velvet jacket?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D41",
+   "prompt": "Write a Blender Python script that renames all selected objects and applies transforms",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D42",
+   "prompt": "Build a Geometry Nodes setup that scatters rocks with density and slope controls",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-environments"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D43",
+   "prompt": "How do I write a GLSL fragment shader for a dissolve effect?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D44",
+   "prompt": "Make an add-on with a panel and operator to batch export FBX",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [
+    "art-pipeline-production"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D45",
+   "prompt": "Set up render passes and AOVs with Cryptomatte for compositing",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D46",
+   "prompt": "Bake a normal map from my high poly to the low poly without seams",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "bake"
+   ],
+   "supports": [
+    "art-surfacing"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D47",
+   "prompt": "Reduce draw calls and set up LODs for my Unreal level",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D48",
+   "prompt": "How do Nanite and Lumen change how I should author meshes in Unreal Engine 5?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D49",
+   "prompt": "What naming convention and folder structure should our studio use for assets?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D50",
+   "prompt": "How do we validate assets automatically before publishing and version them?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D51",
+   "prompt": "Explain USD layers, references and variants for a shared asset library",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D52",
+   "prompt": "Plan a virtual production shoot with LED walls and camera tracking",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D53",
+   "prompt": "Build a portfolio reel that gets me hired as a 3D generalist",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D54",
+   "prompt": "Write the art direction pillars and mood boards for our game's visual style",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D55",
+   "prompt": "How do I use shot composition and lighting to tell the story in a short film?",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-camera-color-render",
+    "art-lighting"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D56",
+   "prompt": "How do I give effective feedback in an art review and handle collaboration with a lead?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D57",
+   "prompt": "Export my rigged character with animations to glTF for the web and check shape keys survive",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-pipeline-production",
+    "art-rigging"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [
+    "art-rigging"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D58",
+   "prompt": "Why does my game character's skin deform badly after export to Unity but fine in Blender?",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D59",
+   "prompt": "I need to bake lightmaps for a baked-lit interior in Godot",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-lighting"
+   ],
+   "stage": [
+    "bake"
+   ],
+   "supports": [
+    "art-lighting"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D60",
+   "prompt": "Render a final turntable of my textured model with proper color management",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [
+    "art-lighting"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D61",
+   "prompt": "Make a looping fire torch effect for a game engine",
+   "primary": "art-simulation-fx",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "fx",
+    "engine"
+   ],
+   "supports": [
+    "art-vfx-realtime"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D62",
+   "prompt": "How do I rig and animate a quadruped walk?",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "rig",
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D63",
+   "prompt": "Create a hero prop: sculpt, retopo, UV, bake and texture a sci-fi helmet",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-surfacing",
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [
+    "art-surfacing"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D64",
+   "prompt": "Our team needs a validator that checks polycount and texture sizes at publish time",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [
+    "art-technical-procedural"
+   ],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D65",
+   "prompt": "There are black patches and shading seams on my baked low poly",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "bake"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D66",
+   "prompt": "My cloth sim jitters and penetrates the character's body",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D67",
+   "prompt": "Fireflies and noise everywhere in my indoor render",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-lighting"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D68",
+   "prompt": "The texture looks blurry up close and has visible tiling",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": true
+  },
+  {
+   "id": "D69",
+   "prompt": "Write me a SQL query to join customers and orders",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D70",
+   "prompt": "Write a Python function that parses CSV files",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D71",
+   "prompt": "How long should I bake cookies and at what temperature?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "D72",
+   "prompt": "Summarize this contract clause about indemnity",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev",
+   "debug": false
+  },
+  {
+   "id": "H01",
+   "prompt": "Do I model in centimeters or meters, and does it matter for physics?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H02",
+   "prompt": "How do I read silhouette and negative space to improve the shape of my creature concept?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H03",
+   "prompt": "What are good primitives to break down a complex object into before I start modeling?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H04",
+   "prompt": "Navigation in the viewport is confusing me, how do I orbit pan and frame selected quickly?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H05",
+   "prompt": "Which ngons are acceptable and where do poles belong on a subdivision surface model?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H06",
+   "prompt": "I want to sculpt fine wrinkles and then keep a low resolution base mesh, what's the workflow with multires versus dyntopo?",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H07",
+   "prompt": "What's the quickest way to quad-remesh a scan and keep the sharp creases?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H08",
+   "prompt": "How do I array a bolt pattern around a cylinder and keep it editable?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H09",
+   "prompt": "Pack my UVs into a trim sheet and pick a padding that survives mip maps",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H10",
+   "prompt": "How do I hand paint a stylized wood texture with a tablet and projection painting?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H11",
+   "prompt": "Why does my albedo have baked lighting in it and how should base color values be limited?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H12",
+   "prompt": "I need roughness variation and fingerprints on glass, how do I layer that shader?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H13",
+   "prompt": "What color temperature and intensity should the sun and sky be for a golden hour exterior?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H14",
+   "prompt": "How do I control shadow softness and light falloff with area lights?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H15",
+   "prompt": "Set up volumetric god rays through a window in a dusty room",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H16",
+   "prompt": "What's the right way to expose a scene using physical light units?",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H17",
+   "prompt": "How do I match a 35mm lens look and set sensor size so the field of view is right?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H18",
+   "prompt": "My exported PNG looks different from the viewport, how do colorspaces and gamma interact?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H19",
+   "prompt": "What is the best denoiser and sampling strategy to cut render time in half?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H20",
+   "prompt": "How do I do a subtle bloom, vignette and film grain in post without destroying highlights?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H21",
+   "prompt": "Build a spine rig with FK and IK and a stretchy option",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H22",
+   "prompt": "How do I set up constraints so a gun parents to either hand while I animate?",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H23",
+   "prompt": "What's the difference between automatic weights and manual weight painting and when do I use each?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H24",
+   "prompt": "Create corrective shape keys that fire when the elbow bends past ninety degrees",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H25",
+   "prompt": "Explain squash and stretch, anticipation and follow through with a practical example",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H26",
+   "prompt": "How do I edit f-curves to remove the robotic linear interpolation in my camera move?",
+   "primary": "art-animation",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H27",
+   "prompt": "What frame counts and foot contacts make a believable run cycle at 24 fps?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H28",
+   "prompt": "How do I do lip sync and eye darts for an acting shot?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H29",
+   "prompt": "Design a believable forest clearing and decide where to place hero rocks, logs and ground cover",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H30",
+   "prompt": "How do I sculpt a heightmap terrain and texture it by slope and altitude?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H31",
+   "prompt": "Model the exterior of a gothic cathedral with correct architectural proportions",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H32",
+   "prompt": "What are good budgets for foliage and instancing for an open world level?",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H33",
+   "prompt": "Make a water splash simulation with foam and spray particles",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H34",
+   "prompt": "Particle system for sparks that bounce off the floor and fade",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H35",
+   "prompt": "How do I stabilize a stiff rigid body stack and set substeps and collision margins?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H36",
+   "prompt": "Set up fur grooming that responds to wind with dynamics",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H37",
+   "prompt": "How do I design a believable character silhouette and facial proportions for a realistic human?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-foundations"
+   ],
+   "stage": [
+    "brief",
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H38",
+   "prompt": "Make hair shading look photorealistic with a good strand shader",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-simulation-fx"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H39",
+   "prompt": "My ZBrush subtools are huge, how do I manage a high-res sculpt for handoff and retopo?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-modeling"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H40",
+   "prompt": "What makes a render read as photorealistic instead of CG?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-camera-color-render",
+    "art-lighting"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H41",
+   "prompt": "Automate exporting every collection to its own FBX with a script I can run headless",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [
+    "art-pipeline-production"
+   ],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H42",
+   "prompt": "Explain fields and attributes in geometry nodes and how to instance on points",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H43",
+   "prompt": "I want to write a custom HLSL shader for a force field with fresnel and scrolling noise",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H44",
+   "prompt": "How do I make a procedural workflow that updates when I change a single parameter?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H45",
+   "prompt": "How should I set up a Movie Render Queue and Sequencer shot in UE5?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H46",
+   "prompt": "What are the right bake settings for ambient occlusion and curvature maps with cage and ray distance?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "bake"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H47",
+   "prompt": "Explain OpenEXR multilayer, deep images and how to avoid broken edges when compositing passes",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H48",
+   "prompt": "Which texture compression format should I pick for mobile versus desktop, and what about KTX2?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H49",
+   "prompt": "How should we version assets and handle approvals with a production tracker like ShotGrid or Kitsu?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H50",
+   "prompt": "Set up a render farm queue for nightly renders",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H51",
+   "prompt": "What does component versus assembly kind mean in USD asset structure?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H52",
+   "prompt": "How do I keep texture libraries and dependencies from breaking when assets move between machines?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H53",
+   "prompt": "What should I put in my ArtStation portfolio and how many pieces?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H54",
+   "prompt": "Help me pitch a visual development concept to a client and define the look",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H55",
+   "prompt": "How can lighting and framing sell the emotional beat of a scene?",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-lighting",
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H56",
+   "prompt": "How do I grow from junior to lead artist and give good critique?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H57",
+   "prompt": "Export a skinned character to glTF and make sure the animations and morph targets arrive in three.js",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-pipeline-production",
+    "art-rigging"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [
+    "art-rigging"
+   ],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H58",
+   "prompt": "Why do my normal maps look inverted in Unreal when they were fine in Blender?",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "bake",
+    "engine",
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H59",
+   "prompt": "Build and light a small diorama then render it with a filmic look",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "light",
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H60",
+   "prompt": "Give me the production stages from concept to final delivery for a small 3D short",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "publish",
+    "brief"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H61",
+   "prompt": "Combine particles, smoke and compositing to create a magical portal effect",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-simulation-fx"
+   ],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H62",
+   "prompt": "How do I set up proper LODs and collision for a modular building kit going into a game?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-environments",
+    "art-modeling"
+   ],
+   "stage": [
+    "engine",
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H63",
+   "prompt": "Make an asset checker in Python that flags missing UVs and overlapping UV islands",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "tooling",
+    "publish"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H64",
+   "prompt": "Texture and shade a character's eyes with a cornea refraction and wet look",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H65",
+   "prompt": "Everything is pitch black when I render but fine in the viewport",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-lighting"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H66",
+   "prompt": "My character's knees pop and collapse when walking",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "rig",
+    "animate"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H67",
+   "prompt": "Mesh has flipped normals and weird shading, what do I check?",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H68",
+   "prompt": "Texture seams show on the model after I painted across UV borders",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": true
+  },
+  {
+   "id": "H69",
+   "prompt": "Best way to learn Spanish quickly?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H70",
+   "prompt": "Fix this Python TypeError in my pandas dataframe",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H71",
+   "prompt": "How do I bake a loaf of sourdough bread",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "H72",
+   "prompt": "Set up lighting for my living room to reduce eye strain",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "split": "dev2",
+   "debug": false
+  },
+  {
+   "id": "F01",
+   "prompt": "Quick question: is Maya Y-up or Z-up by default, and how do I switch it?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F02",
+   "prompt": "I struggle to see big shapes before details. Any exercise for training form and value reading?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F03",
+   "prompt": "What's the practical difference between a left-handed and right-handed axis system when moving assets between apps?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F04",
+   "prompt": "How do I pick colors that feel cohesive using a limited palette and a clear value structure?",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F05",
+   "prompt": "My subdivision surface pinches near the corner of this panel, where do I add support loops?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F06",
+   "prompt": "Best workflow for hard-surface detailing with a bevel weighted by angle and clean shading?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F07",
+   "prompt": "Need to turn a 3 million triangle scan into something animation-friendly with proper edge flow",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F08",
+   "prompt": "How can I make a stack of modifiers that lets me change the width of the whole fence later?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F09",
+   "prompt": "How do I fix non-manifold edges and holes before sending a mesh to 3D print?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F10",
+   "prompt": "How can I get a consistent texel density across a character with 4 UDIM tiles?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F11",
+   "prompt": "Show me how to build an anisotropic brushed aluminum material that looks right under studio lights",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F12",
+   "prompt": "What resolution texture do I need for a hero prop that fills most of the screen at 1080p?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F13",
+   "prompt": "Anything better than a flat color for the rust layer? I want edge-aware dirt and grime that follows curvature",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F14",
+   "prompt": "My PBR textures look too dark in the engine; are my albedo values too low?",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F15",
+   "prompt": "How many lights do I need for a convincing moody portrait and where should the rim sit?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F16",
+   "prompt": "Is it better to use a sun plus sky or an HDRI for an outdoor car shot?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F17",
+   "prompt": "What's the difference between a soft box and a bare bulb for shadow quality in CG?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F18",
+   "prompt": "Why do my interior scenes look fake even with global illumination turned on?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F19",
+   "prompt": "What's the difference between a 24mm and an 85mm lens for my product shots?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F20",
+   "prompt": "I rendered a PNG but the colors look different in Photoshop. What's going on with color spaces?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F21",
+   "prompt": "Which output format should I use for compositing: EXR 16-bit half or 32-bit float?",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F22",
+   "prompt": "How do I animate a smooth dolly zoom with the right focal length change?",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "render",
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F23",
+   "prompt": "How should I structure bones for a ponytail so it follows the head but still swings?",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-simulation-fx"
+   ],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F24",
+   "prompt": "My character's fingers curl weirdly when I bend them, how are weights meant to be distributed?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F25",
+   "prompt": "What are the main differences between a game skeleton and a film rig?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F26",
+   "prompt": "I want a rig for a mechanical crane, with pistons that track using constraints",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F27",
+   "prompt": "How should I plan the poses and timing for a heavy character jumping onto a ledge?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F28",
+   "prompt": "What's the right way to edit mocap curves so the feet stop sliding?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F29",
+   "prompt": "Can you explain easing and arcs for a head turn, and when to use constant vs bezier?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F30",
+   "prompt": "Need advice making a 2 second idle loop that doesn't pop on the first and last frame",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F31",
+   "prompt": "What are good steps for building a modular sci-fi corridor kit that tiles on a grid?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F32",
+   "prompt": "I'm making a desert canyon. How should I sculpt the terrain and layer rock strata and dust?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F33",
+   "prompt": "Recommendations for set-dressing a kitchen so it feels lived-in rather than clean?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F34",
+   "prompt": "How do I fill a large hillside with grass and trees without killing performance?",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "engine",
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F35",
+   "prompt": "How do I get a candle flame that responds to a gentle breeze?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F36",
+   "prompt": "My water simulation loses volume and looks like it's melting, what should I tweak?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F37",
+   "prompt": "How can I fracture a statue so it shatters into believable chunks with dust?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F38",
+   "prompt": "What do I need to know about substeps and constraint iterations to make a cloth curtain stable?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F39",
+   "prompt": "What are the landmarks I should block in first when sculpting a realistic head?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-modeling"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F40",
+   "prompt": "How do I get believable skin tones, redness and translucency on ears and nose?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F41",
+   "prompt": "I want a painterly, anime-inspired shading style with clean shadow shapes",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F42",
+   "prompt": "How can I make a pair of leather boots look worn and realistic with creases and stitched seams?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F43",
+   "prompt": "Write me a snippet that loops over all materials in the scene and prints the ones with missing textures",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F44",
+   "prompt": "How do I drive a Geometry Nodes input from a driver or custom property?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F45",
+   "prompt": "Show a shader that blends two textures by world-space height with a noise mask",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F46",
+   "prompt": "How would I build a node tool in Houdini that scatters props along a curve?",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-environments"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F47",
+   "prompt": "Is there a way to register a custom panel in the sidebar of the 3D viewport?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F48",
+   "prompt": "My lightmaps have bleeding between UV islands in Unity. What padding should I use?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "bake"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F49",
+   "prompt": "How do I set up Nuke so the beauty rebuilds correctly from AOVs?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F50",
+   "prompt": "What texture format and mip settings should I use for a WebGL scene with many materials?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F51",
+   "prompt": "Explain how Lumen and Nanite handle thin geometry like fences and wires",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F52",
+   "prompt": "How do I do planar tracking and set up a clean plate for removing a rig from footage?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "render",
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F53",
+   "prompt": "Our studio wants to adopt a naming scheme and a review process for textures and models, where do we begin?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F54",
+   "prompt": "How do I make sure a downstream department always gets the latest approved geometry?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F55",
+   "prompt": "What are the pros and cons of Perforce versus Git LFS for a team with huge binary files?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F56",
+   "prompt": "What does it take to run an LED volume stage with real-time engine content?",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F57",
+   "prompt": "Can you review my demo reel structure and tell me which shots to cut?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F58",
+   "prompt": "How do I turn a client's vague idea of 'dreamy and nostalgic' into a concrete visual plan?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F59",
+   "prompt": "What's a good way to storyboard a 30 second animated short so the shots flow?",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-animation",
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F60",
+   "prompt": "Is it worth specializing in one area like lighting or staying a generalist at the start of my career?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F61",
+   "prompt": "Plan the full workflow to take a photogrammetry scan to a game-ready asset with baked textures",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-surfacing",
+    "art-vfx-realtime",
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "lowpoly_uv",
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F62",
+   "prompt": "Set up the lighting and render settings for a clean, realistic product render of a glossy bottle",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "light",
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F63",
+   "prompt": "Why do my exported FBX animations play at the wrong speed in Unreal?",
+   "primary": "art-animation",
+   "also_ok": [
+    "art-vfx-realtime",
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F64",
+   "prompt": "My character looks too CG; how do I improve realism with lighting and subsurface?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-lighting",
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "render",
+    "texture",
+    "light"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev3"
+  },
+  {
+   "id": "F65",
+   "prompt": "Can you help me draft an email to my landlord about a broken heater?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F66",
+   "prompt": "How do I rig up a hammock between two trees?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F67",
+   "prompt": "What's a good recipe for rendering chicken fat?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F68",
+   "prompt": "Give me a Python script that renames all the files in a folder by date",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F69",
+   "prompt": "My photo of a sunset has terrible lighting, how do I fix it in Lightroom?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F70",
+   "prompt": "Explain how Git branches and merges work",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F71",
+   "prompt": "What kind of lens should I buy for wildlife photography?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "F72",
+   "prompt": "How do I animate a PowerPoint slide transition?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev3"
+  },
+  {
+   "id": "G01",
+   "prompt": "I'm confused about why my mesh looks mirrored after importing from Blender into Unity, is it a handedness thing?",
+   "primary": "art-foundations",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "blockout",
+    "engine"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G02",
+   "prompt": "Teach me how to analyze the basic geometric solids hidden inside a complicated reference photo",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief",
+    "blockout"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G03",
+   "prompt": "How should I think about the golden ratio and balance when composing a still life render?",
+   "primary": "art-foundations",
+   "also_ok": [
+    "art-camera-color-render",
+    "art-direction-career"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G04",
+   "prompt": "What's a good beginner workflow for starting a 3D asset from reference images?",
+   "primary": "art-foundations",
+   "also_ok": [
+    "art-modeling",
+    "art-direction-career"
+   ],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G05",
+   "prompt": "How do warm and cool colors affect depth in a scene, and how do I use them on purpose?",
+   "primary": "art-foundations",
+   "also_ok": [
+    "art-lighting",
+    "art-direction-career"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G06",
+   "prompt": "What's the difference between edge-based and face-based subdivision creasing, and which is better for a smooth helmet?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G07",
+   "prompt": "I need to sculpt a creature quickly, should I start with dyntopo or a base mesh with ZRemesher?",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G08",
+   "prompt": "Can you walk me through making a bolt, nut and washer set using only a few modifiers?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G09",
+   "prompt": "Why are my boolean cuts leaving thin slivers and ugly shading around the holes?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G10",
+   "prompt": "How do I retopo a hand so the knuckles bend nicely and keep a quad flow?",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface",
+    "art-rigging"
+   ],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G11",
+   "prompt": "How should I set up UV seams on a sneaker to hide them under the stitching?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G12",
+   "prompt": "I want to scan a fabric swatch and make it tile, what's the process?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G13",
+   "prompt": "What roughness values should I use for brushed steel versus polished chrome versus rubber?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G14",
+   "prompt": "Is there a way to mask dirt into the crevices automatically using an ambient occlusion map?",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G15",
+   "prompt": "Do I need a separate specular map for the metal-roughness workflow in glTF?",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G16",
+   "prompt": "What's the best way to light a glass bottle so the edges stand out against a dark background?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G17",
+   "prompt": "How do I fake a big soft window light in a game engine without paying for ray tracing?",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G18",
+   "prompt": "Explain how light probes and reflection probes differ and when to place them",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G19",
+   "prompt": "How can I create the feel of late afternoon haze with long shadows and warm sun?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G20",
+   "prompt": "Which is more realistic for a night street, emissive meshes or real area lights?",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G21",
+   "prompt": "I need a cinematic shot of a character walking toward camera, which lens and camera height do you suggest?",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G22",
+   "prompt": "What's the correct way to set up ACES in a Blender project from scratch?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G23",
+   "prompt": "How many bounces and samples are reasonable for a clean indoor render with caustics turned off?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G24",
+   "prompt": "What does 'filmic' do to my highlights compared with standard?",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G25",
+   "prompt": "How do I make a nice depth-of-field transition (rack focus) in a short sequence?",
+   "primary": "art-camera-color-render",
+   "also_ok": [
+    "art-animation"
+   ],
+   "stage": [
+    "render",
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G26",
+   "prompt": "What's the best way to build a clavicle and shoulder rig so the arm can raise overhead without pinching?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G27",
+   "prompt": "How can I set up a foot roll with heel, ball and toe pivots?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G28",
+   "prompt": "I need a face rig that supports both bones and blendshapes; how do I combine them?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G29",
+   "prompt": "Why does my skinned mesh stretch to the origin when I rotate the root bone?",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G30",
+   "prompt": "How do I retarget a Mixamo animation onto my own skeleton with different proportions?",
+   "primary": "art-animation",
+   "also_ok": [
+    "art-rigging"
+   ],
+   "stage": [
+    "animate",
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G31",
+   "prompt": "Explain the difference between stepped, linear and bezier tangents when blocking",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G32",
+   "prompt": "What are the essential poses in a heavy two-handed weapon swing?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G33",
+   "prompt": "How do I give a flat pantomime performance more personality with secondary motion?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G34",
+   "prompt": "My loop has a hitch when it restarts; how do I cycle the curves properly?",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G35",
+   "prompt": "What frame rate and shutter should I use for a stylized stop-motion look?",
+   "primary": "art-animation",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "animate",
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G36",
+   "prompt": "How would you build a believable alien jungle with large leaves and glowing flora?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G37",
+   "prompt": "What are the key proportions and details that make a castle read as medieval?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G38",
+   "prompt": "How do I texture a massive landscape with splat maps and triplanar rocks?",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "modeling",
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G39",
+   "prompt": "What makes a street scene feel lived-in: signage, wear, trash, cables, puddles?",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G40",
+   "prompt": "Is it better to scatter foliage with a particle system or a procedural tool, from a performance standpoint?",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-technical-procedural",
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "modeling",
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G41",
+   "prompt": "How do I get a believable ocean with foam and spray in a still render?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G42",
+   "prompt": "My hair guides clump together and look like a helmet, how do I add natural variation?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G43",
+   "prompt": "How should I cache and mesh a flip fluid simulation for rendering?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G44",
+   "prompt": "What are the best settings for a stack of boxes that collapses without exploding?",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G45",
+   "prompt": "How can I turn a drawing of a magical explosion into a particle effect with good flipbook textures?",
+   "primary": "art-simulation-fx",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G46",
+   "prompt": "What's the best way to sculpt believable hands with tendons and knuckles?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G47",
+   "prompt": "How do I do anime style shading with a toon ramp and outlines that look good?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G48",
+   "prompt": "What makes eyes look alive and wet in a close-up portrait?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G49",
+   "prompt": "How do I produce photorealistic skin from a scan, with micro detail maps?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G50",
+   "prompt": "How can I design a stylized character with strong shape language and appeal?",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-direction-career",
+    "art-foundations"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G51",
+   "prompt": "Is it possible to batch rename and reorganize hundreds of objects by pattern using Python?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G52",
+   "prompt": "Explain how to make a reusable procedural material controlled by a few sliders",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G53",
+   "prompt": "How can I sample a texture in a vertex shader to displace water waves?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G54",
+   "prompt": "How do I build a tool in Maya or Blender that exports only the visible objects to FBX with a click?",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G55",
+   "prompt": "What's the cleanest way to structure a Geometry Nodes group so it's reusable and documented?",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G56",
+   "prompt": "How does Unreal's virtual shadow map system affect my shadow-casting foliage?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-lighting"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G57",
+   "prompt": "What cage and ray settings fix a bake where details from a nearby part get projected onto my mesh?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "bake"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G58",
+   "prompt": "How should I structure render layers and cryptomatte IDs for a comp artist?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-camera-color-render",
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G59",
+   "prompt": "How do I reduce overdraw from transparent particles in a mobile game?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-simulation-fx"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G60",
+   "prompt": "What's the best way to bake out a vertex animation texture for a flock of birds?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "bake",
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G61",
+   "prompt": "How do we hand off a character from rigging to animation without breaking references?",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-rigging"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G62",
+   "prompt": "We want per-shot versions on the render farm and an automatic dailies review, any structure advice?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G63",
+   "prompt": "What belongs in an asset's metadata so it can be searched and audited later?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G64",
+   "prompt": "How do I set up a turnover from layout to lighting with USD sublayers?",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G65",
+   "prompt": "Explain the benefits of an editorial-first workflow for an animated short",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G66",
+   "prompt": "How do I build a cohesive visual language across a trailer's shots?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G67",
+   "prompt": "What are some strategies to prepare for a studio portfolio review?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G68",
+   "prompt": "How do I handle conflicting feedback from several stakeholders on a look?",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G69",
+   "prompt": "Can you outline how to run a good dailies critique session?",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G70",
+   "prompt": "How can I use color and silhouette to guide the eye in a game environment concept?",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-foundations",
+    "art-environments"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G71",
+   "prompt": "How do I get my character from Blender to Unreal with animations, materials and a clean skeleton?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-rigging",
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G72",
+   "prompt": "My normal map bake has artifacts and now my shading looks bad in the engine. What should I check?",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "bake",
+    "engine"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "dev4"
+  },
+  {
+   "id": "G73",
+   "prompt": "Help me plan a short cinematic: story beats, shot list, lighting setups and render settings",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-camera-color-render",
+    "art-lighting"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G74",
+   "prompt": "What's a good approach to model, UV and texture a tileable stone wall for a game?",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-modeling"
+   ],
+   "stage": [
+    "modeling",
+    "lowpoly_uv",
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G75",
+   "prompt": "I want to simulate a flag and then render it with motion blur, what is the whole path?",
+   "primary": "art-simulation-fx",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G76",
+   "prompt": "Create an automatic LOD generator script for my Blender models that exports to glTF",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-vfx-realtime",
+    "art-pipeline-production"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G77",
+   "prompt": "What's the best way to rig a sailboat for a race?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G78",
+   "prompt": "How can I improve the lighting in my office for video calls?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G79",
+   "prompt": "Give me a recipe for baking sourdough with a starter",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G80",
+   "prompt": "How do I render a PDF from LaTeX with embedded fonts?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G81",
+   "prompt": "Explain the difference between TCP and UDP",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G82",
+   "prompt": "What are tips for sculpting clay pottery by hand?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G83",
+   "prompt": "Write a SQL window function for running totals",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "G84",
+   "prompt": "Which film camera and lens did they use for the movie Parasite?",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "dev4"
+  },
+  {
+   "id": "M01",
+   "prompt": "whats the diff between meters and blender units, my import is tiny",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M02",
+   "prompt": "how to draw a convincing box in perspective before modeling it",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M03",
+   "prompt": "ideas to train my eye for shape and silhouette quickly",
+   "primary": "art-foundations",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M04",
+   "prompt": "should my game assets face +Y or -Z forward?",
+   "primary": "art-foundations",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "blockout"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M05",
+   "prompt": "i cant get clean topology on a shoulder pad with a curved edge",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M06",
+   "prompt": "mirror plus solidify plus bevel for a thin metal plate, best order?",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M07",
+   "prompt": "how do i turn a high res sculpt into a lighter mesh i can unwrap",
+   "primary": "art-modeling",
+   "also_ok": [
+    "art-advanced-character-surface"
+   ],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M08",
+   "prompt": "what's the best way to cut a circular hole in a curved surface without shading problems",
+   "primary": "art-modeling",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M09",
+   "prompt": "my texture is stretched on the sides of the barrel",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "lowpoly_uv"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M10",
+   "prompt": "how do i make a procedural concrete with cracks and stains",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M11",
+   "prompt": "what's the correct way to author a normal map for a game that uses directx convention",
+   "primary": "art-surfacing",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M12",
+   "prompt": "tiling a wood floor texture without it looking repeated",
+   "primary": "art-surfacing",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M13",
+   "prompt": "how do I set up rim lighting to separate a dark character from a dark backdrop",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M14",
+   "prompt": "what hdri should I pick for a studio look with soft reflections on a car",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M15",
+   "prompt": "the shadows in my scene look too harsh and fake, what do I change",
+   "primary": "art-lighting",
+   "also_ok": [],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M16",
+   "prompt": "how many bounces of global illumination do I really need for a bright interior",
+   "primary": "art-lighting",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "light"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M17",
+   "prompt": "what's the best sensor and focal length combo for a wide architecture shot",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M18",
+   "prompt": "my render looks fine in blender but too contrasty when I export a jpeg",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M19",
+   "prompt": "how to add subtle chromatic aberration and lens dirt in the compositor",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M20",
+   "prompt": "are there good settings to reduce render time in cycles without losing quality",
+   "primary": "art-camera-color-render",
+   "also_ok": [],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M21",
+   "prompt": "how do i make a tail that follows the body with some delay",
+   "primary": "art-rigging",
+   "also_ok": [
+    "art-simulation-fx"
+   ],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M22",
+   "prompt": "should I use bones or shape keys for a squishy cheek",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M23",
+   "prompt": "what is a good way to organize control curves and a master controller in a rig",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M24",
+   "prompt": "arm bends weirdly at the elbow when raised, weights look okay",
+   "primary": "art-rigging",
+   "also_ok": [],
+   "stage": [
+    "rig"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M25",
+   "prompt": "how to make a character feel heavy when picking up a box",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M26",
+   "prompt": "tips for a better looping idle animation",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M27",
+   "prompt": "I want to clean the noise out of my motion capture takes",
+   "primary": "art-animation",
+   "also_ok": [],
+   "stage": [
+    "animate"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M28",
+   "prompt": "difference between ease in out and linear for a camera pan",
+   "primary": "art-animation",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "animate",
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M29",
+   "prompt": "how to build a modular dungeon kit",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M30",
+   "prompt": "advice for laying out a believable village on a hillside",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M31",
+   "prompt": "what's a good way to create cliffs and canyons for a game level",
+   "primary": "art-environments",
+   "also_ok": [],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M32",
+   "prompt": "how do i make a forest feel dense but still run well",
+   "primary": "art-environments",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "modeling",
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M33",
+   "prompt": "best way to simulate rain hitting water with ripples",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M34",
+   "prompt": "my cloth simulation is too stretchy like rubber",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": true,
+   "split": "holdout"
+  },
+  {
+   "id": "M35",
+   "prompt": "how to blow up a building so the pieces look right",
+   "primary": "art-simulation-fx",
+   "also_ok": [],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M36",
+   "prompt": "making magic sparkles that trail behind a moving hand",
+   "primary": "art-simulation-fx",
+   "also_ok": [
+    "art-vfx-realtime"
+   ],
+   "stage": [
+    "fx"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M37",
+   "prompt": "how do I model realistic ears and nostrils",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-modeling"
+   ],
+   "stage": [
+    "modeling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M38",
+   "prompt": "what's the process to make lifelike skin with pores and subtle color variation",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M39",
+   "prompt": "how can I get a stylized cel shaded look with thick outlines",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M40",
+   "prompt": "making a convincing leather jacket with wrinkles and stitching",
+   "primary": "art-advanced-character-surface",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "texture"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M41",
+   "prompt": "can i script blender to batch render every camera in the scene",
+   "primary": "art-technical-procedural",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M42",
+   "prompt": "show me how to write a simple geometry nodes scatter with a seed input",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M43",
+   "prompt": "how would I code a water shader with foam at the intersection",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M44",
+   "prompt": "is there an easy way to make a blender addon that adds a button to the toolbar",
+   "primary": "art-technical-procedural",
+   "also_ok": [],
+   "stage": [
+    "tooling"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M45",
+   "prompt": "how do i keep my bake from picking up details from the neighboring mesh",
+   "primary": "art-vfx-realtime",
+   "also_ok": [],
+   "stage": [
+    "bake"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M46",
+   "prompt": "what's the cheapest way to do dynamic shadows on mobile",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-lighting"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M47",
+   "prompt": "how do i get my AOVs into nuke and rebuild the beauty",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "render"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M48",
+   "prompt": "what compression should I use for textures on a quest headset",
+   "primary": "art-vfx-realtime",
+   "also_ok": [
+    "art-surfacing"
+   ],
+   "stage": [
+    "engine"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M49",
+   "prompt": "how do I set up a review process so artists get feedback with version history",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-direction-career"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M50",
+   "prompt": "how should we organize shot folders and file names for a 10 person team",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M51",
+   "prompt": "what's usd good for in a small studio",
+   "primary": "art-pipeline-production",
+   "also_ok": [],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M52",
+   "prompt": "how do we automatically check assets before they are published",
+   "primary": "art-pipeline-production",
+   "also_ok": [
+    "art-technical-procedural"
+   ],
+   "stage": [
+    "publish"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M53",
+   "prompt": "how do i make my portfolio stand out as a junior environment artist",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M54",
+   "prompt": "how should I define the visual style for our indie game before production",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M55",
+   "prompt": "how do filmmakers use color to tell story",
+   "primary": "art-direction-career",
+   "also_ok": [
+    "art-camera-color-render"
+   ],
+   "stage": [
+    "brief"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M56",
+   "prompt": "how do i give constructive notes to a junior artist",
+   "primary": "art-direction-career",
+   "also_ok": [],
+   "stage": [
+    "career"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M57",
+   "prompt": "whats the weather like in Lisbon in May",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M58",
+   "prompt": "how do i rig a sail on a small dinghy",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M59",
+   "prompt": "can you explain how mortgage amortization works",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M60",
+   "prompt": "tips for sculpting a cake topper from fondant",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M61",
+   "prompt": "how do i render a React component on the server",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M62",
+   "prompt": "my kitchen lighting is too dim, what bulbs should I buy",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M63",
+   "prompt": "write a haiku about autumn",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  },
+  {
+   "id": "M64",
+   "prompt": "how do I bake a normal baguette",
+   "primary": "none",
+   "also_ok": [],
+   "stage": [
+    "none"
+   ],
+   "supports": [],
+   "debug": false,
+   "split": "holdout"
+  }
+ ]
+}

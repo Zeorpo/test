@@ -42,6 +42,47 @@ Treat as unverified until checked at the source.
 - Epic Games: Virtual Shadow Maps page; Virtual Production Field Guide announcement.
 - pbrt.org status of the free 4th edition online.
 
+## Round 2: lesser-known repositories (read 2026-10-28)
+
+Selected because they hold primary documentation or working reference code that popular lists skip. Each was shallow-cloned; "read" means the named files, not the whole repo.
+
+| Repo | Commit | What was used |
+|---|---|---|
+| KhronosGroup/3DC-Asset-Creation | 3ba6cf7045f0 | `asset-creation-guidelines/RealtimeAssetCreationGuidelines.md` (v2.0, Aug 2025); v1.0 full chapters `sec03_Geometry`, `sec04_UVCoordinates` (searched for rules, not read end to end) |
+| Allar/ue5-style-guide | 198a8550947d | `README.md` on master, which is the **UE4** guide (naming tables, folder rules, static mesh and texture rules). A `v2` branch for UE5 exists and was not read |
+| zeux/meshoptimizer | f0a684f11ead | `README.md` (core pipeline, simplification, clusterization, compression) and `gltf/README.md` (gltfpack options and extensions) |
+| jpcy/xatlas | f700c7790aaa | `README.md`, `source/xatlas/xatlas.h` (ChartOptions, PackOptions and defaults) |
+| usd-wg/assets | 3b75c2dad6a4 | `docs/asset-structure-guidelines.md` read in full; README |
+| pyblish/pyblish-base | f6c1db62afac | `README.md`, `pyblish/plugin.py` (order constants 0-3) |
+| chadmv/cmt | 1b1a9a4fb154 | `src/swingTwistNode.cpp` and `src/rbfNode.cpp` (comments and structure), `docs/rigging.rst`; `src/DemBones` presence only |
+| orangeduck/Motion-Matching | 57b7250e0d34 | `database.h` (feature definitions), `controller.cpp` (weights, timings), README |
+| InteractiveComputerGraphics/SPlisHSPlasH | dba6b26b9387 | README, `data/Scenes/DoubleDamBreak.json`, `doc/FoamGenerator.md`, DFSPH parameter descriptions |
+| TheRealMJP/BakingLab | c3868af50d72 | README only (baking techniques list); the author's blog series was not reachable |
+| BinomialLLC/basis_universal | ee771a7f913a | README (codecs, formats, bits per pixel) |
+| patriciogonzalezvivo/lygia | aa7580bec667 | directory structure and README listing; function bodies not read |
+| lettier/3d-game-shaders-for-beginners | 29700852da7b | table of contents (`sections/`) and README; text of individual chapters not read |
+| BorisTheBrave/DeBroglie | 27b37fa7a54f | README and `docs/articles` (constraints, path constraints, topologies, pickers listing); API not read |
+| ucupumar/ucupaint | c06eb0809f91 | README |
+| KhronosGroup/glTF-Validator | 602c54043ba6 | Cloned; behaviour exercised through the npm package, source not read |
+
+Cloned but **not read** (listed so nothing is implied): mxgmn/WaveFunctionCollapse (de7d22e705e8), carson-katri/geometry-script (f6ce0ff59f0c), KhronosGroup/KTX-Software (sparse docs path was empty), Unity-Technologies/Graphics, ynput/ayon-core, OpenShadingLanguage, OpenImageIO, OpenTimelineIO, rez, OpenAssetIO.
+
+## Executed, not just read ([T] evidence)
+
+Run in an isolated virtualenv in the session container on 2026-10-28; see `tests/README.md`.
+
+| Tool | Version | Used for |
+|---|---|---|
+| Blender as a Python module (`pip install bpy`) | 5.2.3 LTS (build bundles glTF exporter 5.2.41) | `tests/blender/claims.py`: colour management, bake defaults, glTF exporter defaults and behaviour, Python gotchas, Geometry Nodes API |
+| glTF Validator (`npm gltf-validator`) | 2.0.0-dev.3.10 | validates every exported or optimised file |
+| gltfpack (`npm gltfpack`) | 1.3.0 | simplification and compression flags |
+
+Corrections found by running things: the exporter ships with Apply Modifiers off, and turning it on drops shape keys (verified); a chained `evaluated_geometry().instances_pointcloud().points` raises `ReferenceError` (verified); an 80-character datablock name is accepted in 5.2.3 (verified), so older length limits should not be hard-coded; the pip Blender build lacks the Draco and meshopt libraries.
+
+## Still not reachable
+
+`docs.blender.org` (the Blender manual is not mirrored on GitHub), `projects.blender.org`, `dev.epicgames.com`, `opencolorio.org` docs site. The Blender claims in the skills are therefore backed by source code and execution, not by the manual's prose. Reading the manual needs the domain allowed or a copy from the user's computer.
+
 ## Network blocks encountered
 
 These hosts did not resolve from the session and should be added to the environment's allowed domains if a deeper pass is wanted: docs.blender.org, google.github.io, pbrt.org, dev.epicgames.com, polycount.com, openusd.org, docs.nvidia.com, en.wikipedia.org, arxiv.org, projects.blender.org, opencolorio.org, academysoftwarefoundation.github.io, graphics.pixar.com, blog.selfshadow.com, thebookofshaders.com.

@@ -7,7 +7,7 @@ description: Camera setup, lenses and depth of field, cinematography, color mana
 
 Covers: 35 Camera Setup, 36 Focal Length and Depth of Field, 37 Cinematography, 38 Color Management, 39 Rendering, 40 Render Optimization, 41 Compositing, 42 Post-Processing, 43 Color Grading.
 
-Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary of a page that was blocked for direct fetch (verify); **[K]** established practice, not re-verified.
+Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[S]** from a web-search summary of a page that was blocked for direct fetch (verify); **[T]** executed and passed in `tests/` (Blender 5.2.3 via `bpy`, glTF Validator, gltfpack); **[K]** established practice, not re-verified.
 
 ## 35. Camera setup
 - Camera model: pinhole (infinite depth of field) vs thin-lens (finite aperture, depth of field). pbrt explains that real cameras trade aperture size against exposure time: larger aperture = more light and shorter exposure but a narrower focal plane. [V pbrt-v4 Cameras and Film]
@@ -46,7 +46,8 @@ Core concepts: [V OCIO glossary, ACES docs]
   - Roles: reference ACES2065-1; scene_linear, rendering, default_float Linear Rec.709; data Non-Color; color_timing and compositing_log AgX Log.
   - Looks: AgX and False Color contrast looks (Punchy, Greyscale, Very High ... Very Low Contrast), Filmic contrast looks, ACES 1.3/2.0 Reference Gamut Compression.
   - Input spaces include ACEScg, ACEScc, ACEScct, ACES2065-1, Linear Rec.2020, Linear DCI-P3 D65 and camera logs (ARRI LogC3/LogC4, RED Log3G10, Sony S-Log3, Canon Log2/3, Panasonic V-Log, Apple Log, Blackmagic Film Gen5, DaVinci Intermediate, DJI D-Log).
-  - **Per-file working space** (`bpy.data.colorspace.working_space`, read-only in Python): Linear Rec.709 (default), Linear Rec.2020, or ACEScg; it is the space for all scene-linear colors and for compositing, shader and geometry-node processing. [V `rna_main.cc`, `colormanagement.cc`]
+  - **Per-file working space** (`bpy.data.colorspace.working_space`, read-only in Python): Linear Rec.709 (default), Linear Rec.2020, or ACEScg; it is the space for all scene-linear colors and for compositing, shader and geometry-node processing. [V `rna_main.cc`, `colormanagement.cc`; T COLOR-1]
+  - A factory-default scene uses **AgX** as its view transform; Standard, Filmic, ACES 1.3, ACES 2.0, Khronos PBR Neutral, False Color, Raw and Filmic Log can all be selected, and the six displays above can all be set. [T COLOR-2, COLOR-3]
   - Still [S], not seen in source this session: EXR export in ACES2065-1/ACEScg and loading the official ACES config via the `OCIO` environment variable (standard OCIO behavior).
 - Colorspace discipline checklist: [K]
   1. Declare project working space (scene-linear Rec.709/sRGB primaries, or ACEScg for wide-gamut pipelines).
