@@ -81,7 +81,28 @@ Corrections found by running things: the exporter ships with Apply Modifiers off
 
 ## Still not reachable
 
-`docs.blender.org` (the Blender manual is not mirrored on GitHub), `projects.blender.org`, `dev.epicgames.com`, `opencolorio.org` docs site. The Blender claims in the skills are therefore backed by source code and execution, not by the manual's prose. Reading the manual needs the domain allowed or a copy from the user's computer.
+`docs.blender.org` (a copy of the 5.2 manual was supplied by the user and read, see above), `projects.blender.org`, `dev.epicgames.com`, `opencolorio.org` docs site.
+
+## Blender 5.2 LTS manual (read 2026-10-28)
+
+The manual was supplied by the user as `blender_manual_html.zip` (official HTML build, `blender_manual_v520_en`), pushed to `Zeorpo/testingandadjust` (commit be7e5d625ba0) with images, scripts and styles stripped, and cloned read-only. HTML was converted to plain text keeping only each page's main content (2,358 pages). Pages cited in the skills use the form `[V manual5.2 <path>]`.
+
+| Area | Pages read |
+|---|---|
+| Colour management | `render/color_management/` index, color_spaces, displays_views, opencolorio |
+| Baking | `render/cycles/baking` |
+| glTF | `addons/scene_gltf2` (materials, alpha, UDIM, animation export modes, GPU instancing) |
+| Geometry Nodes | introduction, fields, attributes_reference, instances, baking, performance, tools, simulation zone, XPBD solver, cloth and hair dynamics, collider |
+| Lights and world | `render/lights/light_object`, `world` |
+| Cycles | `render_settings/sampling`, `light_paths`; `render/layers/passes` |
+| Camera | `render/cameras` |
+| Modeling and UV | Boolean and Subdivision Surface modifier pages; `modeling/meshes/uv/editing` (Pack Islands), unwrapping introduction |
+| Physics | cloth settings (physical properties, collisions, shape); fluid introduction, domain settings, liquid particles |
+| Rigging | armature deform parenting; inverse kinematics introduction |
+
+Skimmed or not read: sculpt and retopology tools, weight painting pages, NLA and drivers, compositor node pages, USD/Alembic import-export, asset libraries, EEVEE, hair curves, grease pencil, video editing. Facts about those areas in the skills are still [K] or from source code and tests.
+
+This closes the "Blender manual unreachable" gap for the areas above. The manual describes intent; the tests in `tests/blender/claims.py` show what 5.2.3 actually does, and where both exist the skill cites both.
 
 ## Network blocks encountered
 

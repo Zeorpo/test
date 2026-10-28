@@ -41,6 +41,12 @@ Qualities to control: [K]
 - Godot's reference: aperture 16 is appropriate for sunny outdoors; indoor values 2-4; typical cinematic shutter 1/50 s. [V Godot physical units page]
 - Practical rule: set exposure for the scene first (sunny-16 outdoors, EV about 14-15 [K]), then light the scene in real units, then grade.
 
+### Blender light objects and realistic values [V manual5.2 render/lights/light_object, world; T LIGHT-1]
+- Types: point (omnidirectional; radius gives soft shadows and highlights and makes it look dimmer because power spreads over a larger area), spot (angle 1 to 180 degrees; Blend 0 to 1 softens only the cone edge, not the shadow), area (rectangle, square, disk or ellipse; use a rectangle for a window, a vertical square for a TV), sun (direction only, location irrelevant; strength in W/m2 when Normalize is on).
+- Power is radiant flux in watts, not the electrical watts on a bulb. Suggested point-light values: candle 0.05 W; 800 lm LED 2.1 W; 1000 lm bulb 2.9 W; 1500 lm PAR38 floodlight 4 W (area or disk); 2500 lm fluorescent tube 4.5 W (area rectangle); 5000 lm car headlight 22 W (spot, 125 degrees). Sun strengths: clear sky 1000, cloudy 500, overcast 200, moonlight 0.001 W/m2.
+- Those values look much too bright or dim because eyes adapt and a render does not: compensate with **Exposure** in Render > Film, and set realistic light size and colour too (equal power looks brightest in green, darker in red, darkest in blue).
+- **Exposure** on a light multiplies intensity by 2^exposure; **Temperature** is blackbody Kelvin; with **Normalize** off, a bigger light emits more total light.
+
 ## 29. Three-point lighting
 - **Key**: main light, 30-60 degrees to the side and above the camera axis; defines shadow shape. [K]
 - **Fill**: softer, lower-intensity light from the opposite side or ambient bounce; controls shadow density; key:fill ratios of 2:1 (soft) to 8:1 (dramatic) are common starting points. [K]
@@ -61,6 +67,10 @@ Practice: [K]
 - Check ground contact: use a shadow catcher or projected (dome with ground) HDRI for realistic grounding.
 - HDRI background vs lighting can be decoupled: use one for light, a plate or backdrop for camera.
 - Free libraries (verify licenses): Poly Haven HDRIs (listed in awesome-blender resources). [V awesome-blender]
+
+### World lighting in Blender [V manual5.2 render/lights/world]
+- Use the **Environment Texture** node (not Image Texture) for an HDRI: it maps equirectangular and mirror-ball images correctly. The world surface only accepts a Background shader and lights the scene without being affected by it (no two-way interaction).
+- A world **volume** shader fills all space, and while it is used the world surface shader and sun lights have no effect (the background is assumed infinitely far). For fog or atmospheric scattering use a volume object around the scene so its size sets how much light is scattered or absorbed.
 
 ## 31. Light and shadow control
 - Shadow softness comes from source size relative to the occluder distance (contact-hardening). In Godot, directional light angular distance (sun about 0.5 degrees) gives PCSS contact-hardening shadows at extra cost. [V Godot lights and shadows]

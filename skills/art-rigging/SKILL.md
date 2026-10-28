@@ -56,6 +56,9 @@ Workflow (heaviest value first): [K]
 - Always have a pose library (A-pose, T-pose, extremes, walk contact poses) saved as actions; run after every weight change. [K]
 - Weights are data: validate weights sum to 1, no NaNs, influence count within budget, no weights to non-deforming bones. [V glTF constraints]
 
+### Binding a mesh to an armature in Blender [V manual5.2 animation/armatures/skinning/parenting]
+- Parent with **Armature Deform** (select the meshes, then the armature, Ctrl-P). **With Empty Groups** creates empty vertex groups named after each deforming bone (only bones whose Deform option is on); use it when the groups are already weighted. **With Automatic Weights** assigns weights by distance to each bone ("bone heat"), which is quick but can mis-assign influence in complex armatures, so expect to clean weights by hand.
+
 ## 49. Forward kinematics (FK)
 - FK sets each joint's local rotation directly; the end effector's position is the product of the chain's transforms (`T = T1 * T2 * ... * Tn`). Controls: hierarchy of rotation controls; good for arcs, fine-tuned follow-through, overlapping action and for spines and tails. [K]
 - FK is predictable, keyframe-friendly, and exports as simple rotation tracks. Keep rotations in quaternions or Euler with a documented order (XYZ for limbs commonly); avoid gimbal by choosing order where the large rotation is on the first axis in the order. [K]
@@ -68,6 +71,9 @@ Workflow (heaviest value first): [K]
 - IK chain length and bend limits prevent flipping; set pre-bend (slight angle) in the rest pose so the solver knows the bend direction. [K]
 - Spline IK for tails/tentacles/spines; Rigify has spline and simple tentacle rigs. [V rigify rigs list]
 - For game engines, IK is typically baked to joint rotations in the exported animation unless the engine runs runtime IK (foot placement). Godot supports animation retargeting and skeleton modifiers for runtime adjustment. [V Godot retargeting; K]
+
+### IK solvers [V manual5.2 animation/armatures/posing/bone_constraints/inverse_kinematics; T RIG-1]
+- The Armature IK panel offers **Standard** (what most people use) and **iTaSC**, a multi-constraint solver that weighs several constraints per bone (end-effector position and orientation, distance, joint rotation) together instead of solving them one by one in order, where conflicting constraints overwrite each other. Precision and Iterations bound how long it solves. Spline IK is a separate constraint.
 
 ## 51. Constraints and controllers
 - Common constraints: parent/child-of, copy transforms/location/rotation/scale, track-to/aim, look-at, limit rotation/distance/location, damped track, stretch-to, floor, pole target, spline/path follow, armature/skin. Use constraints for mechanisms and space-switching (e.g., a hand control that follows hips, chest, or world). [K]

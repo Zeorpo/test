@@ -19,7 +19,7 @@ Read this first. It says where the work stands and how to continue.
 | **[S]** | from a search summary; verify | skills |
 | **[K]** | general practice; confirm against the project's own spec | skills |
 
-Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines, the Unreal style guide, meshoptimizer/gltfpack, xatlas, the USD working group's asset-structure guide, Pyblish, cmt, Motion-Matching, SPlisHSPlasH, BakingLab, Basis Universal, LYGIA, DeBroglie, Ucupaint and others) and corrected errors by running things: for example the glTF exporter's Apply Modifiers is off by default and drops shape keys when on.
+Round 3 added the Blender 5.2 manual (about 40 pages read, 6 new executable checks). Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines, the Unreal style guide, meshoptimizer/gltfpack, xatlas, the USD working group's asset-structure guide, Pyblish, cmt, Motion-Matching, SPlisHSPlasH, BakingLab, Basis Universal, LYGIA, DeBroglie, Ucupaint and others) and corrected errors by running things: for example the glTF exporter's Apply Modifiers is off by default and drops shape keys when on.
 
 ## 3. The router, honestly
 
@@ -37,14 +37,14 @@ Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines
 
 ## 5. Environment
 
-- Reachable from the cloud container: GitHub, PyPI, npm. Blocked: docs.blender.org, projects.blender.org, dev.epicgames.com, opencolorio.org and others (see `SOURCES.md`). To read the Blender manual, allow `docs.blender.org` in the environment's network settings, or share a git repository containing the unzipped manual from the user's computer via Remote Control.
+- Reachable from the cloud container: GitHub, PyPI, npm. Blocked: docs.blender.org, projects.blender.org, dev.epicgames.com, opencolorio.org and others (see `SOURCES.md`). Remote Control did not work for the user's Windows computer, so the Blender 5.2 manual was supplied as a zip pushed to a GitHub repo (`Zeorpo/testingandadjust`, text-only copy, 343 MB zip exceeded GitHub's 100 MB file limit). Re-fetch it with `git clone --depth 1 https://github.com/Zeorpo/testingandadjust`.
 - Real Blender runs headless in the container: `python3.13 -m venv v && v/bin/pip install bpy==5.2.3`. It lacks Draco and meshopt libraries; use gltfpack for compression.
 - Chromium and Playwright are preinstalled for screenshots of HTML output.
 - Not installed here: a desktop Blender, Godot, Unreal. Nothing in the repo has been tested against them.
 
 ## 6. Known gaps worth closing
 
-1. Blender manual prose (modifier details, UI behaviour, Geometry Nodes node-by-node semantics) is unread. Source and execution back the facts that are cited, but the manual is the authority on intent.
+1. The Blender 5.2 manual is now read for colour management, baking, glTF, Geometry Nodes core pages, lights, Cycles sampling/passes, cameras, Boolean and Subdivision modifiers, UV packing, cloth, fluid and armature parenting (`SOURCES.md` lists pages). Still unread: sculpt and retopology tools, weight painting, NLA and drivers, compositor nodes, USD and asset libraries, EEVEE, hair curves.
 2. Unreal Engine guidance is thin: Epic's docs are unreachable and the style guide read is the UE4 text (its `v2` branch for UE5 was not read).
 3. `art-direction-career`, `art-animation` (outside motion matching), `art-foundations` and `art-lighting` (outside baking encodings) are still mostly craft knowledge [K]; no lesser-known primary source was found and read for them.
 4. Several cloned repositories were only skimmed (LYGIA function bodies, DeBroglie API, the 3D game shaders chapters); `SOURCES.md` says exactly what was and was not read.
@@ -56,7 +56,7 @@ Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines
 - **Test the router on someone else's prompts**: add 20-30 real prompts from the user to `tests/router/cases.json` as a new split and rerun `tests/router/llm_eval/` (the procedure is in its README).
 - **Improve the script**: add embeddings if a model can be fetched (not possible from this container), or accept ~75% and treat it only as a regression test.
 - **Make the skills load automatically**: add `.claude/skills/<name>` links so Claude Code lists them; not tested.
-- **Read the Blender manual**: allow the domain, or connect the user's computer, then upgrade the [S] and [K] lines in `art-technical-procedural`, `art-modeling` and `art-surfacing`.
+- **Finish the Blender manual**: read the unread areas above from the cloned copy and turn the remaining [K] lines in `art-modeling`, `art-rigging`, `art-animation` and `art-pipeline-production` into [V]/[T].
 - **Build something**: pick a first deliverable from section 8.
 
 ## 8. Suggested first builds (pick with the user)

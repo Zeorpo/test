@@ -65,6 +65,10 @@ Practice:
 - Keep the cage light: densify only for control. Preview at the level the renderer uses (e.g., render level 2-3). [K]
 - When UVs matter, confirm the subdivision UV smoothing mode matches the target renderer (linear vs smooth boundaries) to avoid texture swimming. [V OpenSubdiv face-varying; K for tool settings]
 
+### Subdivision Surface modifier in Blender [V manual5.2 modeling/modifiers/generate/subdivision_surface; T MOD-1]
+- It uses OpenSubdiv. Catmull-Clark smooths; **Simple** only subdivides (useful to raise base resolution before displacement). Keep Levels Viewport at or below Levels Render. High levels cost memory and can hang Blender. Optimal Display skips drawing the new edges in wireframe. **Use Limit Surface** places vertices on the infinite-subdivision surface, and its Quality can be lowered for speed (higher is not always visibly better).
+- It does not let you edit the subdivided result; the **Multiresolution** modifier does, in Sculpt Mode.
+
 ## 13. Digital sculpting
 - Resolution strategy: start low, subdivide progressively (multires) or use dynamic/voxel remesh to redistribute detail; avoid sculpting fine detail on stretched topology. [K]
 - Detail hierarchy: primary (silhouette, proportion), secondary (muscle/fat/folds), tertiary (pores, wrinkles, damage). Use alphas/stamps for tertiary, hand-sculpt secondary. [K]
@@ -84,6 +88,11 @@ Practice:
 - Mesh booleans demand watertight, manifold inputs; coplanar faces and tiny slivers cause failures. Choose exact vs fast solver per case. [K]
 - Clean-up after destructive booleans: dissolve collinear verts, remove tiny faces, rebuild n-gons into quads where they will bevel or subdivide, add bevel after the cut. [K]
 - Non-destructive option: keep cutters as separate objects driving a boolean modifier, bevel after boolean, and apply only for export. [K]
+
+### Boolean modifier solvers [V manual5.2 modeling/modifiers/generate/booleans; T MOD-1]
+- Only manifold meshes are guaranteed correct; non-manifold ones (holes) usually work but can glitch, and the Manifold solver does not work on them at all.
+- **Float**: simple and fast but does not handle overlapping geometry, and Intersect is not allowed. **Exact**: best results and full support for overlapping geometry, much slower. **Manifold**: usually the fastest, manifold meshes only (plus Difference with a plane).
+- Operand can be an object or a collection; with Exact the collection may be empty, which just removes the mesh's own interior (self-intersecting) geometry.
 
 ## 16. Procedural modeling
 - Principles: node graph + parameters + attributes; instances over copies; seeds for repeatable randomness; clear inputs/outputs. [K]

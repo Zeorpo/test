@@ -54,7 +54,7 @@ Where the network blocked the original docs (Blender manual, pbrt.org, Epic docs
 | Check | Result when last run (2026-10-28) |
 |---|---|
 | `tests/lint_skills.py` (structure, 108-topic coverage, tags, cited tests and commits, router in sync) | 17 of 17 pass |
-| `tests/blender/claims.py` (Blender 5.2.3) | 12 of 12 pass |
+| `tests/blender/claims.py` (Blender 5.2.3) | 18 of 18 pass |
 | `tests/gltf/check.mjs` (gltfpack + Khronos Validator) | 4 of 4 pass |
 | `tests/router/run_tests.py tuning` (300 prompts the router was tuned on) | lead skill 91%, stage 86% |
 | `tests/router/llm_eval/score.py` (sub-agents following the router skill, same 64 prompts) | lead 100% (56/56), stage 93%, defect flag 98%, 8/8 off-topic declined |

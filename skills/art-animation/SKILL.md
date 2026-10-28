@@ -146,7 +146,7 @@ Daniel Holden's reference implementation (MIT code; the demo animation dataset i
 ### Delivering animation to glTF [V 3DC-Asset-Creation@3ba6cf7; T GLTF-1]
 - glTF clips are one-shot: looping is decided by the player, so make first and last keys match for loops. Blending between clips (crossfade, additive) is the engine's job, not the file's. Interpolation modes are STEP, LINEAR, CUBICSPLINE.
 - Baked ambient occlusion on parts that move becomes wrong; keep AO off moving parts or accept it.
-- Blender exporter defaults: sample all animations every 1 frame, remove duplicate keyframes, export active actions and NLA tracks. Remove unused animation data to save size.
+- Blender exporter defaults: sample all animations every 1 frame, remove duplicate keyframes, export active actions and NLA tracks. Remove unused animation data to save size. Actions that are neither active nor stashed on an NLA track are not exported, and only pose bones, transforms and shape keys animate (physics, lights and materials are ignored) [V manual5.2 addons/scene_gltf2; T GLTF-1].
 
 ## Quality gates
 - Silhouette readable at blocking stage; storytelling clear without polish.

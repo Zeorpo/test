@@ -58,6 +58,12 @@ Key insight: real cloth barely stretches, only bends. [V Ten Minute Physics #14]
   - Cache and tweak; use sculpted corrective shapes for hero shots.
 - Real-time: simplified cloth (vertex-based PBD) on GPU; blend with skinning (use skinned mesh for stiff regions); capes/hair use secondary bones (spring/wiggle). [K; V Ten Minute Physics #16 GPU cloth exists; V awesome-blender spring/wiggle bone add-ons]
 
+### Blender classic cloth [V manual5.2 physics/cloth/settings/*; T SIM-1]
+- Cloth takes its **rest shape from the first frame**. **Dynamic Mesh** recomputes the rest shape every frame (squash-and-stretch clothing with shape keys or modifiers above the Cloth modifier); **Rest Shape Key** starts from a chosen shape key, for example pre-draped, without relaxing the springs. The two are mutually exclusive.
+- Bending model Linear (old) or Angular; stiffness (tension, compression, shear, bending) and matching damping values; internal springs make a surface cloth behave like a soft body.
+- **Pin Group** weights give soft or hard pinning. **Sewing springs** are loose edges that pull parts of the mesh together and let the cloth slide (a cloak clasp); set a non-zero **Max Sewing Force** because unbounded forces destabilise the first frames. Shrinking Factor shrinks (negative grows).
+- Collisions: the cloth must participate; other objects must be meshes and have **Collision** enabled on the collider, not on the cloth; save the blend file and bake. Quality raises substeps (fewer tears and penetrations, slower). Distance: small values risk errors but run faster; **Impulse Clamping** prevents explosions in tight collisions. Turn on **Self Collision** for close-ups (a cape or blouse), not for a distant flag; self-collision friction differs per fabric (silk below cotton).
+
 ## 75. Fluid simulation
 Approaches: [V Ten Minute Physics #17, #18, #20]
 - **Eulerian (grid-based)**: velocity field on a staggered grid (u on vertical faces, v on horizontal faces), cell types fluid/solid. Each step: add forces (gravity `v += dt*g`), make incompressible (iterate cells: compute divergence `d = u[i+1,j]-u[i,j] + v[i,j+1]-v[i,j]` and push velocities to zero divergence, respecting solid boundaries), then advect (trace back: `x_prev = x - v*dt`, sample with weighted average). Assumes incompressible and inviscid (good for water/gas).
@@ -75,6 +81,11 @@ Production practice: [K]
 - A dam-break scene uses: particle radius 0.025 m, rest density 1000 kg/m3, standard viscosity 0.01, gravity -9.81, CFL time stepping with factor 1 and a maximum step of 0.005 s, DFSPH with 2 to 100 iterations, density error limit 0.05 % and divergence error limit 0.1 % (both parameters are documented as percentages in `TimeStepDFSPH.cpp`), divergence solver on.
 - **Foam, spray and bubbles are a post-process** on the particle sequence (Ihmsen 2012; Bender 2019 turbulent micropolar). The tool recommends a 50 fps input sequence (default step 0.02 s); change the step if you cache at another rate. Foam particles use the fluid velocity field only, so give them a bounding box because there is no boundary handling.
 - Elastic solids can be skinned: a visual mesh is bound to the moving particles in a post-process.
+
+### Blender fluid domain [V manual5.2 physics/fluid/*; T SIM-1]
+- A domain plus at least one Flow object are required; save the file and bake the cache. The domain is always a box (an irregular mesh uses its bounding box); the simulation cannot leave it. Quick Liquid and Quick Smoke create a basic setup.
+- **Resolution Divisions are relative to the domain's longest dimension**, so a 2 m cube needs 128 divisions to match a 1 m cube at 64. Keep the domain just large enough: bigger domains need more divisions and longer bakes. A liquid domain only considers liquid flows; a gas domain considers smoke, fire and smoke-and-fire; the type cannot change later.
+- Secondary particles on a liquid domain: **spray** (flies above the surface), **foam** (stays on the surface), **bubbles** (below it). They are driven by wave-crest, trapped-air and kinetic-energy potentials with min/max thresholds, make their own particle systems, and need geometry assigned to render.
 
 ## 76. Smoke and fire simulation
 Simplified grid model for fire (Ten Minute Physics #21, building on the Eulerian solver): [V]
@@ -123,6 +134,12 @@ Production: [K]
 - **Procedural animation**: IK foot placement, physics-driven props, wind. Combine authored animation with simulated layers; always provide an off switch and baking path. [K]
 - Physics in engines: character controllers (kinematic) vs rigid bodies (dynamic); Godot import suffixes `-rigid`, `-vehicle`, `-wheel` set up physics bodies from imported nodes. [V Godot node_type_customization]
 - Validate with consistent time step (fixed delta), deterministic seeds, and automated tests for tunneling and instability.
+
+### Node-based XPBD dynamics in 5.2 (experimental) [V manual5.2 modeling/geometry_nodes/simulation/*; T GN-3]
+- The **XPBD Solver** node simulates hair, cloth and particles with extended position-based dynamics; it takes a *World* bundle of geometry, constraints and effectors, a Delta Time (subdivided by Substeps), filter tags and an optional simulation-space transform. It is meant to sit inside friendlier assets.
+- **Cloth Dynamics**: input mesh is the rest shape; Pin Group (1 pins, below 1 is soft); Stretchiness and Bendiness (0 forbids stretching or bending); Substeps for stability at the cost of repeated collision detection; Constraint Iterations (raise them if the residual error is above 1). Marked experimental, and **self-collision is not supported yet**.
+- **Hair Dynamics** has Animation mode (curves follow the surface) and Physics mode (thin flexible rods attached to the surface). Experimental.
+- **Collider** node: Deforming (enable only if the collider deforms), Boundary (keep things inside), Edge Contacts (only for curves; prevents thin geometry slipping through), Margin, Friction (the tangent of the friction angle), Softness, filter tags.
 
 ## Cache and handoff checklist
 - Name by shot/asset/version/frame range; store frame rate, units, scale, coordinate system, and simulation parameters in sidecar metadata.

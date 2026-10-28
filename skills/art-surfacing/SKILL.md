@@ -31,6 +31,11 @@ Tags: **[V]** read from a primary source this session (`/SOURCES.md`); **[T]** e
 - If overlaps are intentional (repeated logos), move every overlap by a whole UV unit before baking so only one copy sits in 0-1; the moved copies still sample the same pixels afterwards. [V Khronos 1.0 UVs]
 - Seams belong where the real object has breaks (stitching, panel lines) or in low-visibility areas. Even texel density is the default; give visible parts more space deliberately and document it. A tileable texture authored at 10 cm x 10 cm shows a quarter of itself on a 5 cm object when UVs are to scale. [V Khronos 1.0 UVs]
 
+### Blender's Pack Islands options [V manual5.2 modeling/meshes/uv/editing]
+- **Shape method**: Exact Shape (concave, fills holes and concave regions), Boundary Shape (convex hull, never packs into holes), Bounding Box (fastest, loosest). **Rotation**: Any, Axis-aligned (rotate to the smallest rectangle, then 90-degree turns), or Cardinal (90-degree turns only, which keeps texture direction).
+- **Margin method**: Scaled (multiplies existing UV scale), Add, or Fraction (exact share of the unit square, slower). **Lock Pinned Islands** keeps pinned islands in place (lock scale, rotation, or both) and packs the others around them; **Merge Overlapping** treats overlapping islands as one while packing so intentional overlaps stay together.
+- **Pack To**: the closest UDIM, the active UDIM, the original bounding box, or a **Custom Region** set with Set User Region (use it for atlas regions and trim sheet zones).
+
 ## 20. Texture painting
 - Layer-based painting in Blender: **Ucupaint** is an add-on that manages texture layers and masks for Eevee and Cycles (works from Blender 2.76, installable as an extension on 4.2+). [V ucupaint@c06eb08 README]
 - Work in layers with masks, non-destructively: base material, variation, wear/dirt, detail, decals. Paint masks, not final colors. [K]
@@ -79,6 +84,10 @@ Validation: render the asset under at least 3 lighting setups (HDRI studio, outd
   - UDN: `r = normalize(vec3(t.xy + u.xy, t.z))`.
 - Bake with the same tangent basis as the renderer. glTF specifies MikkTSpace for generated tangents. [V]
 - Filtering: mipmaps with trilinear/anisotropic filtering are standard; textures with non-linear data (normal, roughness) need care when mip-filtered (roughness-from-normal variance, toksvig-like adjustments) to avoid shiny distant surfaces. [K]
+
+### Data maps and glTF channel packing [V manual5.2 render/color_management/color_spaces, addons/scene_gltf2]
+- Normal, displacement and other data maps must be marked **Non-Color Data**; Blender guesses an image's colour space and is often wrong for these.
+- glTF-friendly packing: occlusion R, roughness G, metallic B in one image; clearcoat R with clearcoat roughness G; transmission R; sheen roughness A; volume thickness G. Set every one of those image nodes to Non-Color. See `art-vfx-realtime` for the exporter rules.
 
 ## 23. Procedural texturing
 - Building blocks: noise (value, gradient/Perlin, simplex, Worley/cellular), fractal Brownian motion (summed octaves), domain warping, gradients, masks, voronoi cracks, bricks/tiles, triplanar projection. [K; V The Book of Shaders chapters on random, noise, fractional brownian motion, cellular noise]

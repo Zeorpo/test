@@ -30,6 +30,15 @@ Quality and performance: [K]
 - Packaging: node groups appended from asset libraries; version them; document each group input; test with default values.
 Learning resources listed in awesome-blender: manual, Chris Prenninger and Blue Fox playlists, Bradley Animation for beginners, Default Cube (procedural), Geometry Script (Python to nodes), NodeToPython (convert node setups to Python), Sverchok (node-based parametric design), Animation Nodes. [V awesome-blender]
 
+### Geometry Nodes rules from the manual [V manual5.2 modeling/geometry_nodes/*]
+- **Fields** are functions evaluated per element: dashed links and diamond sockets; a solid red link means a non-field socket was wired into a field socket. A field is evaluated in the context (geometry component and domain) of each data-flow node it feeds, so the same field tree can give different results in different places. Pull one value out of a field with **Sample Index** or **Attribute Statistic**.
+- **Attributes** have types float, boolean, 32-bit integer, vector, colour (RGBA 32-bit float, linear) and byte colour (8-bit, sRGB); types and domains convert implicitly where possible. Anonymous attributes are interpolated automatically when geometry changes but cannot be wired to a separate geometry: use Sample Index or Sample Nearest Surface.
+- **Instances**: nodes process each unique geometry once, not once per instance, so put expensive nodes before realising. Nested instancing works but only **eight levels** render or display; deeper trees must be realised at the end. Geometry Nodes instancing cannot be mixed with the Instancing panel in Properties. The `id` attribute corrects motion blur for moving instances.
+- **Simulation zones**: inputs wired to the Simulation Input are evaluated once at the start; links from outside into the zone are re-evaluated every step; no link may leave the zone; results come only from the Simulation Output (which allows sub-frame interpolation for motion blur). The zone runs only while the frame changes and is cached like other physics. Anonymous attributes are not carried unless stored in the simulation state. Simulation zones work only in the modifier context, not in tools.
+- **Baking**: Bake node (any part of the tree) and simulation baking; the blend file must be saved first; baked data is not guaranteed readable by another Blender version; volumes bake as OpenVDB; only material references can be re-pointed afterwards.
+- **Performance** (manual): minimise geometry, use instances and realise late, avoid repeated expensive nodes (Boolean, Proximity, Raycast) and per-frame simulation zones, restrict work with Selection inputs, **Capture Attribute** to cache a value used more than once, and bake what need not update every frame.
+- **Node-based tools**: switch the Geometry Node Editor's Node Tree Sub-Type to **Tool** to make a group that runs from a menu; mark it as an Asset to share it or put it in another menu. Inspection features do not work in the Tool context.
+
 ## 87. Procedural workflows
 Principles: [K]
 - **Parameters over hand edits**: design the minimal set of controls that cover the variation required; hide the rest.

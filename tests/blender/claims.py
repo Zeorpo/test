@@ -215,6 +215,65 @@ def _():
     assert not missing, missing
 
 
+@check("CAM-1", "Camera: sensor fit AUTO/HORIZONTAL/VERTICAL; lens PERSP/ORTHO/PANO/CUSTOM; DOF has f-stop, blades, rotation, ratio")
+def _():
+    cam = bpy.data.cameras.new("c")
+    assert enum_ids(cam.bl_rna.properties["sensor_fit"]) == ["AUTO", "HORIZONTAL", "VERTICAL"]
+    assert enum_ids(cam.bl_rna.properties["type"]) == ["PERSP", "ORTHO", "PANO", "CUSTOM"]
+    assert {"aperture_fstop", "aperture_blades", "aperture_rotation", "aperture_ratio"} <= set(cam.dof.bl_rna.properties.keys())
+
+
+@check("CYC-1", "Cycles defaults: adaptive on at 0.01; bounces 12/4/4/12/0/8; clamp direct 0, indirect 10; filter glossy 1.0; caustics on")
+def _():
+    s = bpy.context.scene
+    s.render.engine = "CYCLES"
+    c = s.cycles
+    assert c.use_adaptive_sampling and abs(c.adaptive_threshold - 0.01) < 1e-6 and c.adaptive_min_samples == 0
+    assert (c.max_bounces, c.diffuse_bounces, c.glossy_bounces, c.transmission_bounces, c.volume_bounces,
+            c.transparent_max_bounces) == (12, 4, 4, 12, 0, 8)
+    assert (c.sample_clamp_direct, c.sample_clamp_indirect, c.blur_glossy) == (0.0, 10.0, 1.0)
+    assert c.caustics_reflective and c.caustics_refractive
+    assert enum_ids(c.bl_rna.properties["denoising_input_passes"]) == ["RGB", "RGB_ALBEDO", "RGB_ALBEDO_NORMAL"]
+
+
+@check("LIGHT-1", "Lights: POINT/SUN/SPOT/AREA; area shapes; spot angle 1-180 degrees, blend 0-1; exposure and temperature exist")
+def _():
+    import math
+    assert enum_ids(bpy.types.Light.bl_rna.properties["type"]) == ["POINT", "SUN", "SPOT", "AREA"]
+    assert enum_ids(bpy.types.AreaLight.bl_rna.properties["shape"]) == ["SQUARE", "RECTANGLE", "DISK", "ELLIPSE"]
+    sp = bpy.types.SpotLight.bl_rna.properties
+    assert abs(math.degrees(sp["spot_size"].hard_min) - 1) < 0.01 and abs(math.degrees(sp["spot_size"].hard_max) - 180) < 0.01
+    assert (sp["spot_blend"].hard_min, sp["spot_blend"].hard_max) == (0.0, 1.0)
+    assert {"exposure", "temperature", "use_temperature"} <= set(bpy.types.Light.bl_rna.properties.keys())
+
+
+@check("MOD-1", "Boolean solvers FLOAT/EXACT/MANIFOLD, operations and operand types; Subdivision CATMULL_CLARK/SIMPLE with Use Limit Surface")
+def _():
+    b = bpy.types.BooleanModifier.bl_rna.properties
+    assert enum_ids(b["solver"]) == ["FLOAT", "EXACT", "MANIFOLD"]
+    assert enum_ids(b["operation"]) == ["INTERSECT", "UNION", "DIFFERENCE"]
+    assert enum_ids(b["operand_type"]) == ["OBJECT", "COLLECTION"]
+    sd = bpy.types.SubsurfModifier.bl_rna.properties
+    assert enum_ids(sd["subdivision_type"]) == ["CATMULL_CLARK", "SIMPLE"] and "use_limit_surface" in sd
+
+
+@check("SIM-1", "Cloth: ANGULAR/LINEAR bending, dynamic mesh, rest shape key, sewing, internal springs, self collision; fluid GAS/LIQUID with spray/foam/bubbles")
+def _():
+    cl = bpy.types.ClothSettings.bl_rna.properties
+    assert enum_ids(cl["bending_model"]) == ["ANGULAR", "LINEAR"]
+    assert {"use_dynamic_mesh", "rest_shape_key", "use_sewing_springs", "use_internal_springs"} <= set(cl.keys())
+    assert "use_self_collision" in bpy.types.ClothCollisionSettings.bl_rna.properties
+    fd = bpy.types.FluidDomainSettings.bl_rna.properties
+    assert enum_ids(fd["domain_type"]) == ["GAS", "LIQUID"]
+    assert {"resolution_max", "use_spray_particles", "use_foam_particles", "use_bubble_particles"} <= set(fd.keys())
+
+
+@check("RIG-1", "Armature IK solver property offers two solvers (Standard and iTaSC)")
+def _():
+    items = enum_ids(bpy.types.Pose.bl_rna.properties["ik_solver"])
+    assert len(items) == 2, items
+
+
 def main():
     for fn in RESULTS_FUNCS:
         fn()
