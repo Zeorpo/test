@@ -18,6 +18,6 @@ Do not apply it to non-3D requests that merely use words like bake, rig, render 
 ## Tests
 
 - `python tests/lint_skills.py` checks structure, topic coverage, evidence tags, cited tests and commits.
-- `python tests/router/run_tests.py tuning` regression-tests the routing table; `holdout` measures how well it generalises (about 75% lead-skill accuracy on unseen prompts; read `tests/router/README.md` before trusting it).
+- `python tests/router/run_tests.py tuning` regression-tests the routing table; `holdout` measures how well it generalises (about 75% lead-skill accuracy on unseen prompts). The skill itself did far better when fresh agents followed it (`tests/router/llm_eval/`); read `tests/router/README.md` for both.
 - `python tests/blender/claims.py` (needs `pip install bpy==5.2.3` or a desktop Blender) and `node tests/gltf/check.mjs` run real Blender and glTF checks. See `tests/README.md`.
 - After editing `tests/router/routes.json` run `python tests/router/gen_table.py --write`.

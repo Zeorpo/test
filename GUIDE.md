@@ -25,7 +25,7 @@ Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines
 
 - The skill `art-router` is the router. `tests/router/` holds a word-and-retrieval version of its rules so the table can be regression-tested.
 - That script scores 91% (lead skill) and 86% (stage) on prompts it was tuned on, and 69-76% / 58-64% on three fresh sets it had not seen. The declared targets for fresh sets were 85% / 75%, so **it does not meet them**. Details, method and relabelling log are in `tests/router/README.md`.
-- No test of the skill's own judgement (Claude following it) has been run. Doing that needs fresh sub-agents routing real prompts, or prompts written by someone else.
+- The skill's own judgement was tested: four fresh sub-agents with only `CLAUDE.md` and the router skill routed the 64 held-out prompts. Lead skill 56/56, stage 52/56, defect flag 55/56, 8/8 off-topic declined (`tests/router/llm_eval/`). Limits: one run, same author for prompts, labels and skill, same model family, routing only (the lead skills were not read). A test with prompts from other people would be stronger.
 - Retrieval reads the skills' text, so editing a skill can change routing; rerun the tests after edits.
 
 ## 4. How to use the skills
@@ -53,7 +53,7 @@ Round 2 added 16 lesser-known repositories (Khronos 3D Commerce asset guidelines
 
 ## 7. Options for the next step
 
-- **Test the router for real**: have fresh sub-agents (or the user) route 50 real prompts using only `CLAUDE.md` and the router skill, and score them against labels written by someone else.
+- **Test the router on someone else's prompts**: add 20-30 real prompts from the user to `tests/router/cases.json` as a new split and rerun `tests/router/llm_eval/` (the procedure is in its README).
 - **Improve the script**: add embeddings if a model can be fetched (not possible from this container), or accept ~75% and treat it only as a regression test.
 - **Make the skills load automatically**: add `.claude/skills/<name>` links so Claude Code lists them; not tested.
 - **Read the Blender manual**: allow the domain, or connect the user's computer, then upgrade the [S] and [K] lines in `art-technical-procedural`, `art-modeling` and `art-surfacing`.

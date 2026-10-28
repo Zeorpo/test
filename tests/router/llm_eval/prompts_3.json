@@ -1,0 +1,66 @@
+[
+ {
+  "id": "M32",
+  "prompt": "how do i make a forest feel dense but still run well"
+ },
+ {
+  "id": "M57",
+  "prompt": "whats the weather like in Lisbon in May"
+ },
+ {
+  "id": "M22",
+  "prompt": "should I use bones or shape keys for a squishy cheek"
+ },
+ {
+  "id": "M23",
+  "prompt": "what is a good way to organize control curves and a master controller in a rig"
+ },
+ {
+  "id": "M43",
+  "prompt": "how would I code a water shader with foam at the intersection"
+ },
+ {
+  "id": "M34",
+  "prompt": "my cloth simulation is too stretchy like rubber"
+ },
+ {
+  "id": "M62",
+  "prompt": "my kitchen lighting is too dim, what bulbs should I buy"
+ },
+ {
+  "id": "M49",
+  "prompt": "how do I set up a review process so artists get feedback with version history"
+ },
+ {
+  "id": "M40",
+  "prompt": "making a convincing leather jacket with wrinkles and stitching"
+ },
+ {
+  "id": "M52",
+  "prompt": "how do we automatically check assets before they are published"
+ },
+ {
+  "id": "M16",
+  "prompt": "how many bounces of global illumination do I really need for a bright interior"
+ },
+ {
+  "id": "M06",
+  "prompt": "mirror plus solidify plus bevel for a thin metal plate, best order?"
+ },
+ {
+  "id": "M59",
+  "prompt": "can you explain how mortgage amortization works"
+ },
+ {
+  "id": "M35",
+  "prompt": "how to blow up a building so the pieces look right"
+ },
+ {
+  "id": "M64",
+  "prompt": "how do I bake a normal baguette"
+ },
+ {
+  "id": "M42",
+  "prompt": "show me how to write a simple geometry nodes scatter with a seed input"
+ }
+]

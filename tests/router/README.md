@@ -41,7 +41,14 @@ On the tuning sets the router scores 91% / 86%, which is the figure that oversta
 Because retrieval reads the text of `skills/*/SKILL.md`, **editing a skill can change routing**. That is intended (the router
 follows the skills) but it means the holdout is only clean the first time it is run against a given version of the skills.
 
-## Why it falls short
+## Independent test of the skill itself
+
+Fresh sub-agents given only `CLAUDE.md` and the router skill routed the same 64 held-out prompts without seeing labels:
+lead skill 56/56 (100%), stage 52/56 (93%), defect flag 55/56 (98%), all 8 off-topic prompts declined with no wrong
+declines. Targets (85% / 75% / 80%) were met. The script managed 80% / 64% / 93% on the on-topic subset. Method, limits and
+the five misses: [llm_eval/README.md](llm_eval/README.md). This, not the script, is the evidence that the router works.
+
+## Why the script falls short
 
 - Natural prompts use words no list anticipated ("bones for a ponytail", "candle flame", "light a glass bottle").
 - Many prompts span two stages; the label is a judgement and the script picks one.

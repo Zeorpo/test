@@ -1,0 +1,66 @@
+[
+ {
+  "id": "M13",
+  "prompt": "how do I set up rim lighting to separate a dark character from a dark backdrop"
+ },
+ {
+  "id": "M20",
+  "prompt": "are there good settings to reduce render time in cycles without losing quality"
+ },
+ {
+  "id": "M01",
+  "prompt": "whats the diff between meters and blender units, my import is tiny"
+ },
+ {
+  "id": "M09",
+  "prompt": "my texture is stretched on the sides of the barrel"
+ },
+ {
+  "id": "M54",
+  "prompt": "how should I define the visual style for our indie game before production"
+ },
+ {
+  "id": "M19",
+  "prompt": "how to add subtle chromatic aberration and lens dirt in the compositor"
+ },
+ {
+  "id": "M50",
+  "prompt": "how should we organize shot folders and file names for a 10 person team"
+ },
+ {
+  "id": "M18",
+  "prompt": "my render looks fine in blender but too contrasty when I export a jpeg"
+ },
+ {
+  "id": "M63",
+  "prompt": "write a haiku about autumn"
+ },
+ {
+  "id": "M37",
+  "prompt": "how do I model realistic ears and nostrils"
+ },
+ {
+  "id": "M48",
+  "prompt": "what compression should I use for textures on a quest headset"
+ },
+ {
+  "id": "M28",
+  "prompt": "difference between ease in out and linear for a camera pan"
+ },
+ {
+  "id": "M33",
+  "prompt": "best way to simulate rain hitting water with ripples"
+ },
+ {
+  "id": "M07",
+  "prompt": "how do i turn a high res sculpt into a lighter mesh i can unwrap"
+ },
+ {
+  "id": "M04",
+  "prompt": "should my game assets face +Y or -Z forward?"
+ },
+ {
+  "id": "M61",
+  "prompt": "how do i render a React component on the server"
+ }
+]

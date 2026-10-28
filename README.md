@@ -57,9 +57,10 @@ Where the network blocked the original docs (Blender manual, pbrt.org, Epic docs
 | `tests/blender/claims.py` (Blender 5.2.3) | 12 of 12 pass |
 | `tests/gltf/check.mjs` (gltfpack + Khronos Validator) | 4 of 4 pass |
 | `tests/router/run_tests.py tuning` (300 prompts the router was tuned on) | lead skill 91%, stage 86% |
-| `tests/router/run_tests.py holdout` (64 prompts it never saw) | lead skill 75%, stage 64%, **below the 85% and 75% targets** (first run 73%; it moved to 75% after the skills' text was upgraded, because retrieval reads that text) |
+| `tests/router/llm_eval/score.py` (sub-agents following the router skill, same 64 prompts) | lead 100% (56/56), stage 93%, defect flag 98%, 8/8 off-topic declined |
+| `tests/router/run_tests.py holdout` (the script, same 64 prompts) | lead skill 75%, stage 64%, **below the 85% and 75% targets** (first run 73%; it moved to 75% after the skills' text was upgraded, because retrieval reads that text) |
 
-The router tests are a regression check on the routing table. They are not the router; the skill is, and no automated test of the skill's own judgement has been run. Details and method: [tests/router/README.md](tests/router/README.md).
+The script is a regression check on the routing table. The router is the skill; when fresh sub-agents followed it on the 64 held-out prompts they got the lead skill right 56 of 56 times, the stage 52 of 56 and declined all 8 off-topic prompts (`tests/router/llm_eval/`). One run, same author for prompts, labels and skill; read its limits before leaning on it. Details and method: [tests/router/README.md](tests/router/README.md).
 
 ## Known limits
 

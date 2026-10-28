@@ -1,0 +1,66 @@
+[
+ {
+  "id": "M11",
+  "prompt": "what's the correct way to author a normal map for a game that uses directx convention"
+ },
+ {
+  "id": "M51",
+  "prompt": "what's usd good for in a small studio"
+ },
+ {
+  "id": "M44",
+  "prompt": "is there an easy way to make a blender addon that adds a button to the toolbar"
+ },
+ {
+  "id": "M02",
+  "prompt": "how to draw a convincing box in perspective before modeling it"
+ },
+ {
+  "id": "M12",
+  "prompt": "tiling a wood floor texture without it looking repeated"
+ },
+ {
+  "id": "M25",
+  "prompt": "how to make a character feel heavy when picking up a box"
+ },
+ {
+  "id": "M31",
+  "prompt": "what's a good way to create cliffs and canyons for a game level"
+ },
+ {
+  "id": "M45",
+  "prompt": "how do i keep my bake from picking up details from the neighboring mesh"
+ },
+ {
+  "id": "M39",
+  "prompt": "how can I get a stylized cel shaded look with thick outlines"
+ },
+ {
+  "id": "M15",
+  "prompt": "the shadows in my scene look too harsh and fake, what do I change"
+ },
+ {
+  "id": "M47",
+  "prompt": "how do i get my AOVs into nuke and rebuild the beauty"
+ },
+ {
+  "id": "M58",
+  "prompt": "how do i rig a sail on a small dinghy"
+ },
+ {
+  "id": "M03",
+  "prompt": "ideas to train my eye for shape and silhouette quickly"
+ },
+ {
+  "id": "M38",
+  "prompt": "what's the process to make lifelike skin with pores and subtle color variation"
+ },
+ {
+  "id": "M53",
+  "prompt": "how do i make my portfolio stand out as a junior environment artist"
+ },
+ {
+  "id": "M26",
+  "prompt": "tips for a better looping idle animation"
+ }
+]

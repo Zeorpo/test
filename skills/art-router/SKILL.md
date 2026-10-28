@@ -98,6 +98,7 @@ Announce the route in one line before working: `Route: stage=<id>, lead=<skill>,
 
 ## 6. Known limits of this router
 
+- Fresh sub-agents that followed only this skill routed 64 unseen prompts with the lead skill right 56 of 56 times, the stage right 52 of 56, and all 8 off-topic prompts declined (`tests/router/llm_eval/`). Stage is the weak point: four of the five misses were stage calls where two answers are defensible.
 - `tests/router/` holds a word-and-retrieval version of these rules. On prompts it was tuned on it scores 91% (lead skill) and 86% (stage); on three fresh sets it had not seen it scored 69%, 76% and 73% (lead skill; 75% on the last after the skills were upgraded) and 58-64% (stage). Treat it as a regression test for the table, not as the router. Your judgement, guided by sections 0-4, is the router.
 - It cannot reliably separate "bake a normal map" from "bake a baguette". Section 0 exists for that reason.
 - Stage is genuinely ambiguous for requests that span two stages; pick the earliest unfinished one and state the chain.
